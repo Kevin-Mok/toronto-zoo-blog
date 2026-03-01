@@ -182,6 +182,23 @@ openssl rand -hex 32
 
 Paste that output into `REVALIDATE_TOKEN`.
 
+### 7.4 Sync media files to VPS
+
+This project keeps `public/media/**` out of Git and out of the Docker image, so media must be present on the VPS filesystem for the `web` container bind mount.
+
+From your local machine:
+
+```bash
+scripts/ops/rsync-videos-to-vps.sh kevin@51.222.111.61 /home/kevin/zoo-blog
+```
+
+On the VPS, verify files exist:
+
+```bash
+cd ~/zoo-blog
+find public/media -type f | head
+```
+
 ## 8) Start the Stack
 
 ```bash
