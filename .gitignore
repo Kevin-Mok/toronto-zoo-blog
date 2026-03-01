@@ -10,6 +10,9 @@ test-artifacts
 .env
 .env.local
 .DS_Store
+.vps-secrets.*.txt
+docker-compose.yml.bak.*
+deploy/Caddyfile.bak.*
 
 # Large source videos are synced separately to VPS and excluded from git
 public/media/**/videos/*.mp4
