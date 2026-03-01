@@ -4,6 +4,26 @@ This guide covers the full path from buying `torontozooreport.com` at Porkbun to
 
 All command snippets below are fish-shell compatible.
 
+## Fast Path (Automated Bootstrap Script)
+
+If you want one command to handle VPS setup end-to-end (Docker install, firewall, repo config, Certbot, compose startup), run:
+
+```bash
+cd /home/kevin/zoo-blog
+chmod +x scripts/ops/bootstrap-vps.sh
+scripts/ops/bootstrap-vps.sh --domain torontozooreport.com --admin-email you@torontozooreport.com
+```
+
+Defaults and options:
+
+- `--allow-directus-port` opens `8055/tcp` in UFW.
+- `--skip-upgrade` skips `apt upgrade`.
+- `--skip-certbot` skips Certbot issuance/renew setup.
+- `--app-port <port>` forces a specific localhost app port for the web container.
+- You can pre-set secrets via env vars: `POSTGRES_PASSWORD`, `DIRECTUS_KEY`, `DIRECTUS_SECRET`, `ADMIN_PASSWORD`, `REVALIDATE_TOKEN`.
+
+The script writes generated credentials to `.vps-secrets.<timestamp>.txt` in the repo root and stores `APP_HOST_PORT` in `.env`.
+
 ## 1) Porkbun DNS Setup (Do This First)
 
 In Porkbun DNS for `torontozooreport.com`, create:
@@ -124,15 +144,16 @@ cd zoo-blog
 
 ## 7) Configure Project for `torontozooreport.com`
 
-### 7.1 Update Caddy domain
+### 7.1 Configure host Nginx domain
 
-Edit [deploy/Caddyfile](/home/kevin/coding/zoo-blog/deploy/Caddyfile) and change:
+If you use the bootstrap script, Nginx config is created automatically at:
 
-- `torontozooblog.com, www.torontozooblog.com`
+- `/etc/nginx/sites-available/<your-domain>.conf`
 
-to:
+If configuring manually, ensure `server_name` includes both:
 
-- `torontozooreport.com, www.torontozooreport.com`
+- `torontozooreport.com`
+- `www.torontozooreport.com`
 
 ### 7.2 Update compose environment values
 
@@ -171,10 +192,15 @@ docker compose ps
 Tail logs during first boot (important for TLS issuance):
 
 ```bash
-docker compose logs -f caddy web directus postgres
+docker compose logs -f web directus postgres
+sudo journalctl -u nginx -f
 ```
 
-When DNS is correct and ports `80/443` are reachable, Caddy will automatically provision HTTPS certificates.
+Issue HTTPS certificate with Certbot + Nginx plugin:
+
+```bash
+sudo certbot --nginx -d torontozooreport.com -d www.torontozooreport.com
+```
 
 ## 9) Validate Production
 
@@ -261,12 +287,12 @@ zcat /path/to/backup.sql.gz | docker compose exec -T postgres psql -U zoo -d zoo
 
 - DNS still not propagated
 - Ports `80` or `443` blocked by OVHcloud network/security rules
-- Domain in Caddyfile does not match DNS records
+- Nginx `server_name` does not match DNS records
 
 ### Site works by IP but not by domain
 
 - DNS A/AAAA records incorrect
-- Caddyfile domain mismatch
+- Nginx `server_name` mismatch
 
 ### SSH works but web traffic fails
 
@@ -292,5 +318,5 @@ zcat /path/to/backup.sql.gz | docker compose exec -T postgres psql -U zoo -d zoo
 - Strong secrets replaced in `docker-compose.yml`
 - `.env` set with `REVALIDATE_TOKEN` and optional `DIRECTUS_TOKEN`
 - `NEXT_PUBLIC_SITE_URL` is `https://torontozooreport.com`
-- Caddy serves valid TLS for both root and `www`
+- Nginx serves valid TLS for both root and `www`
 - Backups confirmed running

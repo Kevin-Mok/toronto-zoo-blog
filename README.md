@@ -108,6 +108,18 @@ LHCI_POST_PATH=/blog/2026/3/1/toronto-zoo-field-notes npm run perf:lhci:logs
 docker compose up -d --build
 ```
 
+### One-Command VPS Bootstrap (Docker + Certbot)
+
+Run this on the Ubuntu VPS after cloning the repo:
+
+```bash
+chmod +x scripts/ops/bootstrap-vps.sh
+scripts/ops/bootstrap-vps.sh --domain yourdomain.com --admin-email you@yourdomain.com
+```
+
+The script installs Docker/Compose, configures host Nginx + UFW, patches domain/secrets, issues Let's Encrypt certificates with Certbot, and starts the stack.
+It auto-selects a free localhost app port (and persists it in `.env` as `APP_HOST_PORT`) to avoid port collisions.
+
 Full VPS runbook (Porkbun domain -> OVHcloud Ubuntu production):
 [Porkbun to OVHcloud Ubuntu Deployment](/home/kevin/coding/zoo-blog/docs/deploy-porkbun-ubuntu-vps.md)
 
@@ -116,7 +128,7 @@ Services:
 - `web`: Next.js standalone app
 - `postgres`: PostgreSQL database
 - `directus`: CMS backend
-- `caddy`: reverse proxy and TLS
+- `nginx` (host service): reverse proxy and TLS
 - `backup`: daily compressed DB backups
 
 ## Toronto Zoo Source Inputs

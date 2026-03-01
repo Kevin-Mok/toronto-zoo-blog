@@ -11,7 +11,7 @@ Services:
 - `postgres` for Prisma operational writes.
 - `directus` for CMS content authoring.
 - `web` for Next.js SSR app.
-- `caddy` for reverse proxy and TLS termination.
+- Host `nginx` for reverse proxy and TLS termination.
 - `backup` for daily compressed Postgres dumps.
 
 ## Backups
