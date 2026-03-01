@@ -1,0 +1,29 @@
+import { describe, expect, it } from 'vitest';
+import { getPostByDateAndSlug, getPostBySlug, getPostSummaries } from '@/lib/directus/queries';
+
+describe('content provider', () => {
+  it('returns post summaries with valid route slugs', async () => {
+    const posts = await getPostSummaries();
+
+    expect(posts.length).toBeGreaterThan(0);
+    expect(posts[0]?.slug).toMatch(/^[a-z0-9-]+$/);
+  });
+
+  it('enforces Toronto Zoo media constraints in fallback data', async () => {
+    const post = await getPostBySlug('toronto-zoo-field-notes');
+
+    expect(post).not.toBeNull();
+    expect(post?.content.sections.length).toBeGreaterThan(0);
+
+    for (const section of post?.content.sections ?? []) {
+      expect(section.paragraphs.length).toBeGreaterThanOrEqual(2);
+      expect(section.photos.length).toBe(2);
+      expect(section.video?.kind).toBe('video');
+    }
+  });
+
+  it('resolves post by canonical date + title slug segments', async () => {
+    const post = await getPostByDateAndSlug('2026', '3', '1', 'toronto-zoo-field-notes');
+    expect(post?.slug).toBe('toronto-zoo-field-notes');
+  });
+});
