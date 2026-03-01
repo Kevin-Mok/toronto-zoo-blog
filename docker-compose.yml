@@ -39,6 +39,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "127.0.0.1:${APP_HOST_PORT:-3001}:3000"
+    volumes:
+      - ./public/media:/app/public/media:ro
     environment:
       NEXT_PUBLIC_SITE_URL: https://torontozooblog.com
       DATABASE_URL: postgresql://zoo:zoo@postgres:5432/zoo_blog
