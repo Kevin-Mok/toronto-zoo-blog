@@ -203,6 +203,7 @@ Output format:
 ### 4.2 Make Changes in Small Commits
 
 - Keep commits focused (one feature, one intent).
+- If unrelated changes exist, split them into individual commits by concern; never bundle unrelated work in a single commit.
 - Use [Conventional Commits](https://www.conventionalcommits.org/) format.
 - Prefer a follow-up refactor commit after behavior is stable.
 
