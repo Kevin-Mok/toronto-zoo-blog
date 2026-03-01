@@ -10,3 +10,6 @@ test-artifacts
 .env
 .env.local
 .DS_Store
+
+# Large source videos are synced separately to VPS and excluded from git
+public/media/**/videos/*.mp4
