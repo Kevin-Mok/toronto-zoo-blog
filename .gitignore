@@ -1,6 +1,7 @@
 node_modules
 .next
 coverage
+.lighthouseci
 playwright-report
 test-results
 test-artifacts
