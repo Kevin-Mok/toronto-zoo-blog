@@ -1,0 +1,48 @@
+{
+  "name": "toronto-zoo-blog",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "playwright test",
+    "test:e2e:logs": "bash scripts/ops/run-e2e-with-logs.sh",
+    "perf:lhci": "lhci autorun --config=./lighthouserc.js",
+    "perf:lhci:logs": "bash scripts/ops/run-lhci-with-logs.sh",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "media:import": "tsx scripts/media/import-toronto-zoo.ts",
+    "media:reencode": "bash scripts/media/reencode-videos.sh",
+    "media:posters": "bash scripts/media/generate-posters.sh",
+    "seed:directus": "tsx scripts/seed/seed-directus.ts"
+  },
+  "dependencies": {
+    "@directus/sdk": "^16.1.0",
+    "@prisma/client": "^6.4.1",
+    "next": "15.5.9",
+    "react": "19.1.2",
+    "react-dom": "19.1.2",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.52.0",
+    "@testing-library/react": "^16.1.0",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "eslint": "^9.17.0",
+    "eslint-config-next": "15.5.9",
+    "jsdom": "^26.0.0",
+    "prisma": "^6.4.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.8.2",
+    "vitest": "^3.2.4"
+  }
+}

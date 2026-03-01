@@ -1,0 +1,81 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: zoo_blog
+      POSTGRES_USER: zoo
+      POSTGRES_PASSWORD: zoo
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zoo -d zoo_blog"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  directus:
+    image: directus/directus:11.7.2
+    environment:
+      KEY: change-me-directus-key
+      SECRET: change-me-directus-secret
+      ADMIN_EMAIL: admin@torontozooblog.com
+      ADMIN_PASSWORD: change-me-admin-password
+      DB_CLIENT: pg
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: zoo_blog
+      DB_USER: zoo
+      DB_PASSWORD: zoo
+      PUBLIC_URL: http://localhost:8055
+    ports:
+      - "8055:8055"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NEXT_PUBLIC_SITE_URL: https://torontozooblog.com
+      DATABASE_URL: postgresql://zoo:zoo@postgres:5432/zoo_blog
+      DIRECTUS_URL: http://directus:8055
+      DIRECTUS_TOKEN: ${DIRECTUS_TOKEN:-}
+      REVALIDATE_TOKEN: ${REVALIDATE_TOKEN:-replace-this}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      directus:
+        condition: service_started
+
+  caddy:
+    image: caddy:2.9.1-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      web:
+        condition: service_started
+
+  backup:
+    image: postgres:16-alpine
+    environment:
+      PGPASSWORD: zoo
+    entrypoint: ["/bin/sh", "/scripts/backup-loop.sh"]
+    volumes:
+      - ./scripts/ops/backup-loop.sh:/scripts/backup-loop.sh:ro
+      - backups:/backups
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  caddy_data:
+  caddy_config:
+  backups:
