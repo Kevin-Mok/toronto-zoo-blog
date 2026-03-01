@@ -3,30 +3,35 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 LOCAL_MEDIA_DIR="${ROOT_DIR}/public/media"
+DEFAULT_REMOTE_HOST="kevin@51.222.111.61"
+DEFAULT_REMOTE_REPO_PATH="/home/kevin/zoo-blog"
 
-if [[ $# -lt 1 ]]; then
+if [[ $# -gt 0 && ( "$1" == "-h" || "$1" == "--help" ) ]]; then
   cat <<'USAGE'
 Usage:
-  scripts/ops/rsync-videos-to-vps.sh <user@host> [remote_repo_path] [extra_rsync_args...]
+  scripts/ops/rsync-videos-to-vps.sh [user@host] [remote_repo_path] [extra_rsync_args...]
 
 Examples:
-  scripts/ops/rsync-videos-to-vps.sh kevin@203.0.113.10 /home/kevin/zoo-blog
-  scripts/ops/rsync-videos-to-vps.sh kevin@vps /home/kevin/zoo-blog --dry-run
+  scripts/ops/rsync-videos-to-vps.sh
+  scripts/ops/rsync-videos-to-vps.sh kevin@51.222.111.61 /home/kevin/zoo-blog
+  scripts/ops/rsync-videos-to-vps.sh kevin@51.222.111.61 /home/kevin/zoo-blog --dry-run
 
 Notes:
+  - Default host: kevin@51.222.111.61
+  - Default repo path: /home/kevin/zoo-blog
   - Syncs only MP4 files under public/media/**/videos/ to the same path on VPS.
   - Requires rsync + ssh on local machine and rsync on VPS.
 USAGE
   exit 1
 fi
 
-REMOTE_HOST="$1"
-REMOTE_REPO_PATH="${2:-/home/kevin/zoo-blog}"
+REMOTE_HOST="${1:-${DEFAULT_REMOTE_HOST}}"
+REMOTE_REPO_PATH="${2:-${DEFAULT_REMOTE_REPO_PATH}}"
 
 if [[ $# -ge 2 ]]; then
   shift 2
 else
-  shift 1
+  shift $#
 fi
 
 EXTRA_RSYNC_ARGS=("$@")

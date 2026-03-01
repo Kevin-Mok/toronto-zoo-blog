@@ -30,11 +30,11 @@ In Porkbun DNS for `torontozooreport.com`, create:
 
 - `A` record:
   - Host: `@`
-  - Answer: `<YOUR_VPS_IPV4>`
+  - Answer: `51.222.111.61`
   - TTL: default
 - `A` record:
   - Host: `www`
-  - Answer: `<YOUR_VPS_IPV4>`
+  - Answer: `51.222.111.61`
   - TTL: default
 
 Optional if your VPS has IPv6:
@@ -83,7 +83,7 @@ If using OVHcloud `VPS` firewall feature, add equivalent rules there.
 SSH to the server:
 
 ```bash
-ssh ubuntu@<YOUR_VPS_IPV4>
+ssh ubuntu@51.222.111.61
 ```
 
 Update packages:
@@ -229,7 +229,7 @@ This stack exposes Directus on port `8055` by default. For production, do one of
 SSH tunnel example:
 
 ```bash
-ssh -L 8055:localhost:8055 ubuntu@<YOUR_VPS_IPV4>
+ssh -L 8055:localhost:8055 ubuntu@51.222.111.61
 ```
 
 Then open `http://localhost:8055` locally.
