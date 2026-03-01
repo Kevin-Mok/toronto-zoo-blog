@@ -1,0 +1,56 @@
+{
+  "date": "2026-02-28",
+  "source_page": "/home/kevin/coding/portfolio-site/app/toronto-zoo/2026/2/28/page.tsx",
+  "source_root": "/home/kevin/coding/portfolio-site/public",
+  "destination_root": "/home/kevin/coding/zoo-blog/public/media/toronto-zoo/2026-02-28",
+  "files": [
+    {
+      "source": "images/blog/toronto-zoo-2026-02-28/snow-leopard-closeup-1.webp",
+      "destination": "images/snow-leopard-closeup-1.webp"
+    },
+    {
+      "source": "images/blog/toronto-zoo-2026-02-28/snow-leopard-closeup-2.webp",
+      "destination": "images/snow-leopard-closeup-2.webp"
+    },
+    {
+      "source": "images/blog/toronto-zoo-2026-02-28/snow-leopard-video-poster.webp",
+      "destination": "images/snow-leopard-video-poster.webp"
+    },
+    {
+      "source": "images/blog/toronto-zoo-2026-02-28/polar-bear-closeup-1.webp",
+      "destination": "images/polar-bear-closeup-1.webp"
+    },
+    {
+      "source": "images/blog/toronto-zoo-2026-02-28/polar-bear-closeup-2.webp",
+      "destination": "images/polar-bear-closeup-2.webp"
+    },
+    {
+      "source": "images/blog/toronto-zoo-2026-02-28/polar-bear-video-poster.webp",
+      "destination": "images/polar-bear-video-poster.webp"
+    },
+    {
+      "source": "images/blog/toronto-zoo-2026-02-28/gibbon-closeup-1.webp",
+      "destination": "images/gibbon-closeup-1.webp"
+    },
+    {
+      "source": "images/blog/toronto-zoo-2026-02-28/gibbon-closeup-2.webp",
+      "destination": "images/gibbon-closeup-2.webp"
+    },
+    {
+      "source": "images/blog/toronto-zoo-2026-02-28/gibbon-video-poster.webp",
+      "destination": "images/gibbon-video-poster.webp"
+    },
+    {
+      "source": "videos/blog/toronto-zoo-2026-02-28/snow-leopard-highlight.mp4",
+      "destination": "videos/snow-leopard-highlight.mp4"
+    },
+    {
+      "source": "videos/blog/toronto-zoo-2026-02-28/polar-bear-highlight.mp4",
+      "destination": "videos/polar-bear-highlight.mp4"
+    },
+    {
+      "source": "videos/blog/toronto-zoo-2026-02-28/gibbon-highlight.mp4",
+      "destination": "videos/gibbon-highlight.mp4"
+    }
+  ]
+}
