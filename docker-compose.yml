@@ -37,6 +37,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:${APP_HOST_PORT:-3001}:3000"
     environment:
       NEXT_PUBLIC_SITE_URL: https://torontozooblog.com
       DATABASE_URL: postgresql://zoo:zoo@postgres:5432/zoo_blog
@@ -47,19 +49,6 @@ services:
       postgres:
         condition: service_healthy
       directus:
-        condition: service_started
-
-  caddy:
-    image: caddy:2.9.1-alpine
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      web:
         condition: service_started
 
   backup:
@@ -76,6 +65,4 @@ services:
 
 volumes:
   postgres_data:
-  caddy_data:
-  caddy_config:
   backups:
