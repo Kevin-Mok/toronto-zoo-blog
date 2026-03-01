@@ -23,7 +23,12 @@ describe('content provider', () => {
   });
 
   it('resolves post by canonical date + title slug segments', async () => {
-    const post = await getPostByDateAndSlug('2026', '3', '1', 'toronto-zoo-field-notes');
+    const post = await getPostByDateAndSlug('2026', '2', '28', 'toronto-zoo-field-notes');
     expect(post?.slug).toBe('toronto-zoo-field-notes');
+  });
+
+  it('resolves the March follow-up post by canonical date + slug', async () => {
+    const post = await getPostByDateAndSlug('2026', '3', '1', 'toronto-zoo-field-notes-march-1-2026');
+    expect(post?.slug).toBe('toronto-zoo-field-notes-march-1-2026');
   });
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { LOCAL_POSTS, CANONICAL_SPELLINGS } from '@/lib/content/local-seed';
+import { CANONICAL_SPELLINGS, LOCAL_POSTS } from '@/lib/content/local-seed';
 import { blogPostsSchema } from '@/lib/validation/schemas';
 
 describe('blog schema contracts', () => {
@@ -8,13 +8,24 @@ describe('blog schema contracts', () => {
     expect(parsed.success).toBe(true);
   });
 
-  it('contains canonical spellings in Toronto Zoo copy', () => {
-    const torontoPost = LOCAL_POSTS.find((post) => post.slug === 'toronto-zoo-field-notes');
-    expect(torontoPost).toBeDefined();
+  it('preserves canonical spellings in the original Toronto post', () => {
+    const originalPost = LOCAL_POSTS.find((post) => post.slug === 'toronto-zoo-field-notes');
+    expect(originalPost).toBeDefined();
 
-    const joined = JSON.stringify(torontoPost);
+    const joined = JSON.stringify(originalPost);
     for (const spelling of CANONICAL_SPELLINGS) {
       expect(joined).toContain(spelling);
     }
+  });
+
+  it('contains expected sections in the March Toronto post', () => {
+    const marchPost = LOCAL_POSTS.find((post) => post.slug === 'toronto-zoo-field-notes-march-1-2026');
+    expect(marchPost).toBeDefined();
+    const titles = marchPost?.content.sections.map((section) => section.title) ?? [];
+    expect(titles).toEqual([
+      'Pygmy Hippopotamus Talk',
+      'African Penguin Talk',
+      'Western Lowland Gorilla Talk',
+    ]);
   });
 });
