@@ -1,4 +1,4 @@
-# Toronto Zoo Blog
+# Toronto Zoo Report
 
 Recruiter-focused 2026 full-stack build: TypeScript strict mode, SSR-first Next.js App Router routes, PostgreSQL + Prisma operational data, and Directus CMS integration (self-hosted) for editorial content.
 

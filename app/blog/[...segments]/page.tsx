@@ -280,7 +280,7 @@ export async function generateMetadata({ params }: BlogSegmentsPageProps): Promi
   if (parsed.kind === 'year') {
     return archiveMetadata(
       `${parsed.year} Archives`,
-      `Toronto Zoo Blog posts published in ${parsed.year}.`,
+      `Toronto Zoo Report posts published in ${parsed.year}.`,
       `/blog/${parsed.year}`,
     );
   }
@@ -288,7 +288,7 @@ export async function generateMetadata({ params }: BlogSegmentsPageProps): Promi
   if (parsed.kind === 'month') {
     return archiveMetadata(
       `${parsed.year}/${parsed.month} Archives`,
-      `Toronto Zoo Blog posts published in ${parsed.year}/${parsed.month}.`,
+      `Toronto Zoo Report posts published in ${parsed.year}/${parsed.month}.`,
       `/blog/${parsed.year}/${parsed.month}`,
     );
   }
@@ -296,7 +296,7 @@ export async function generateMetadata({ params }: BlogSegmentsPageProps): Promi
   if (parsed.kind === 'day') {
     return archiveMetadata(
       `${parsed.year}/${parsed.month}/${parsed.day} Archives`,
-      `Toronto Zoo Blog posts published on ${parsed.year}/${parsed.month}/${parsed.day}.`,
+      `Toronto Zoo Report posts published on ${parsed.year}/${parsed.month}/${parsed.day}.`,
       `/blog/${parsed.year}/${parsed.month}/${parsed.day}`,
     );
   }
@@ -341,7 +341,7 @@ export default async function BlogSegmentsPage({ params }: BlogSegmentsPageProps
       <ArchivePageView
         eyebrow="Archive"
         title={`Posts from ${parsed.year}`}
-        description="Browse every Toronto Zoo Blog post from this year."
+        description="Browse every Toronto Zoo Report post from this year."
         postsCountLabel={`${posts.length} post${posts.length === 1 ? '' : 's'}`}
         posts={posts}
         latestPosts={latestPosts}
@@ -363,7 +363,7 @@ export default async function BlogSegmentsPage({ params }: BlogSegmentsPageProps
       <ArchivePageView
         eyebrow="Archive"
         title={`Posts from ${parsed.year}/${parsed.month}`}
-        description="Browse Toronto Zoo Blog posts from this month."
+        description="Browse Toronto Zoo Report posts from this month."
         postsCountLabel={`${posts.length} post${posts.length === 1 ? '' : 's'}`}
         posts={posts}
         latestPosts={latestPosts}
@@ -385,7 +385,7 @@ export default async function BlogSegmentsPage({ params }: BlogSegmentsPageProps
       <ArchivePageView
         eyebrow="Archive"
         title={`Posts from ${parsed.year}/${parsed.month}/${parsed.day}`}
-        description="Browse Toronto Zoo Blog posts from this day."
+        description="Browse Toronto Zoo Report posts from this day."
         postsCountLabel={`${posts.length} post${posts.length === 1 ? '' : 's'}`}
         posts={posts}
         latestPosts={latestPosts}

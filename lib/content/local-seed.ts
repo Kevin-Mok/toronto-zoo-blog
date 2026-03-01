@@ -8,7 +8,7 @@ export const LOCAL_POSTS: BlogPost[] = [
     excerpt:
       'Transcript-grounded animal talks with close-up media selections and conservation context for families planning an educational visit.',
     publishDate: '2026-02-28',
-    authorName: 'Toronto Zoo Blog Team',
+    authorName: 'Toronto Zoo Report Team',
     category: 'field-notes',
     tags: ['family-guide', 'toronto-zoo', 'snow-leopard', 'polar-bear', 'gibbon'],
     readingMinutes: 7,
@@ -165,7 +165,7 @@ export const LOCAL_POSTS: BlogPost[] = [
     excerpt:
       'A family-first Toronto Zoo field note focused on pygmy hippo, penguin, and gorilla behavior, with practical media picks and conservation context.',
     publishDate: '2026-03-01',
-    authorName: 'Toronto Zoo Blog Team',
+    authorName: 'Toronto Zoo Report Team',
     category: 'field-notes',
     tags: ['family-guide', 'toronto-zoo', 'pygmy-hippo', 'penguin', 'gorilla'],
     readingMinutes: 7,

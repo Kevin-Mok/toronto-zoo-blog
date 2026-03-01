@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
   },
+  icons: {
+    icon: '/media/logo-cr.png',
+    shortcut: '/media/logo-cr.png',
+    apple: '/media/logo-cr.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

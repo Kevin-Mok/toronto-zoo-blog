@@ -16,7 +16,7 @@ export default async function HomePage() {
         <p className="eyebrow">2026 recruiter-ready full-stack build</p>
         <h1>Conservation storytelling engineered for performance, accessibility, and editorial scale.</h1>
         <p>
-          Toronto Zoo Blog is a family-first wildlife publication with strict TypeScript contracts,
+          Toronto Zoo Report is a family-first wildlife publication with strict TypeScript contracts,
           SSR-first rendering, and a media pipeline built for repeatable quality.
         </p>
         <div className="cta-row">

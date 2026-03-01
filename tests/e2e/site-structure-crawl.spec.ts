@@ -39,6 +39,6 @@ test('crawl entire web structure round trip', async ({ page }) => {
   await page.getByRole('link', { name: /back to all posts/i }).first().click();
   await expect(page).toHaveURL(/\/blog$/);
 
-  await page.locator('header').getByRole('link', { name: /Toronto Zoo Blog homepage/i }).click();
+  await page.locator('header').getByRole('link', { name: /Toronto Zoo Report homepage/i }).click();
   await expect(page).toHaveURL(/\/$/);
 });

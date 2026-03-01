@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -9,8 +10,15 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="shell site-header__inner">
-        <Link href="/" className="site-brand" aria-label="Toronto Zoo Blog homepage">
-          Toronto Zoo Blog
+        <Link href="/" className="site-brand" aria-label="Toronto Zoo Report homepage">
+          <Image
+            src="/media/logo-word.png"
+            alt="Toronto Zoo Report"
+            width={176}
+            height={54}
+            className="site-brand__logo"
+            priority
+          />
         </Link>
 
         <button
