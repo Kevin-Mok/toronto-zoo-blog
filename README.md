@@ -108,6 +108,8 @@ LHCI_POST_PATH=/blog/2026/3/1/toronto-zoo-field-notes npm run perf:lhci:logs
 docker compose up -d --build
 ```
 
+`web` bind-mounts `./public/media` into the container at runtime. If that folder is empty on the host, `/_next/image` requests for site media will fail.
+
 ### One-Command VPS Bootstrap (Docker + Certbot)
 
 Run this on the Ubuntu VPS after cloning the repo:
