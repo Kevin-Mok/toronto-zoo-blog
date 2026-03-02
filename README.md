@@ -5,6 +5,7 @@ Recruiter-focused 2026 full-stack build: TypeScript strict mode, SSR-first Next.
 ## Routes
 
 - `/` Home landing page
+- `/about` About page (reporting method and activism lens)
 - `/blog` Blog index with categories/tags and archive navigation
 - `/blog/YYYY`, `/blog/YYYY/M`, `/blog/YYYY/M/D` Archive landing pages
 - `/blog/YYYY/M/D/title` Canonical dynamic article route

@@ -4,6 +4,10 @@ test('crawl entire web structure round trip', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveURL(/\/$/);
 
+  await page.locator('header').getByRole('link', { name: /^About$/ }).click();
+  await expect(page).toHaveURL(/\/about$/);
+  await expect(page.getByRole('heading', { level: 1, name: /reporter \+ gentle watchdog coverage/i })).toBeVisible();
+
   await page.locator('header').getByRole('link', { name: /^Blog$/ }).click();
   await expect(page).toHaveURL(/\/blog$/);
 
