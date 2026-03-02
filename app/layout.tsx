@@ -4,6 +4,13 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 
+const DEFAULT_OG_IMAGE = '/opengraph-image';
+const HOMEPAGE_OG_TITLE = 'Toronto Zoo Report: animal updates and keeper talks';
+const HOMEPAGE_OG_IMAGE_ALT =
+  'Open Graph card for Toronto Zoo Report with a snow leopard resting in snow as the background, the TorontoZooReport wordmark, a short headline and description, and an "Explore Blog" button.';
+const HOMEPAGE_TWITTER_IMAGE_ALT =
+  'Snow leopard background with TorontoZooReport branding, a clear headline and description about animal updates and conservation context, and an "Explore Blog" call-to-action.';
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -12,11 +19,30 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   openGraph: {
-    title: SITE_NAME,
+    title: HOMEPAGE_OG_TITLE,
     description: SITE_DESCRIPTION,
     url: SITE_URL,
     siteName: SITE_NAME,
     type: 'website',
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: HOMEPAGE_OG_IMAGE_ALT,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: HOMEPAGE_OG_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        alt: HOMEPAGE_TWITTER_IMAGE_ALT,
+      },
+    ],
   },
   alternates: {
     canonical: SITE_URL,

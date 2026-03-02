@@ -135,12 +135,18 @@ function getArchivePath(parsed: Extract<ParsedSegments, { kind: 'year' | 'month'
   return `/blog/${parsed.year}/${parsed.month}/${parsed.day}`;
 }
 
+function getBlogOgImageUrl(canonicalPath: string): string {
+  const segmentPath = canonicalPath.replace(/^\/blog\//, '');
+  return `${SITE_URL}/blog/opengraph-image/${segmentPath}`;
+}
+
 function archiveMetadata(
   title: string,
   description: string,
   canonicalPath: string,
-): Pick<Metadata, 'title' | 'description' | 'alternates' | 'openGraph'> {
+): Pick<Metadata, 'title' | 'description' | 'alternates' | 'openGraph' | 'twitter'> {
   const absoluteUrl = `${SITE_URL}${canonicalPath}`;
+  const ogImageUrl = getBlogOgImageUrl(canonicalPath);
 
   return {
     title,
@@ -154,6 +160,20 @@ function archiveMetadata(
       type: 'website',
       url: absoluteUrl,
       siteName: SITE_NAME,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${title} preview card`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImageUrl],
     },
   };
 }
@@ -163,29 +183,38 @@ function postMetadata(post: Awaited<ReturnType<typeof getPostBySlug>>): Metadata
     return {};
   }
 
+  const summary = post.excerpt.trim();
   const canonicalPath = getPostCanonicalPath(post);
   const absoluteUrl = `${SITE_URL}${canonicalPath}`;
+  const ogImageUrl = getBlogOgImageUrl(canonicalPath);
 
   return {
     title: post.title,
-    description: post.excerpt,
+    description: summary,
     alternates: {
       canonical: absoluteUrl,
     },
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description: summary,
       type: 'article',
       url: absoluteUrl,
       siteName: SITE_NAME,
+      publishedTime: `${post.publishDate}T00:00:00Z`,
       images: [
         {
-          url: post.hero.src,
-          width: post.hero.width,
-          height: post.hero.height,
-          alt: post.hero.alt,
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${post.title} preview card`,
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: summary,
+      images: [ogImageUrl],
     },
   };
 }
