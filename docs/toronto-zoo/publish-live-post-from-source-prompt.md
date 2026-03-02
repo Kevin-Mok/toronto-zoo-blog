@@ -56,7 +56,11 @@ Do not create a docs-only result. The result must be an actual post available at
    - Source filename traceability
    - Alt text
    - Caption
-5. Never fabricate transcript quotes
+5. Hero selection for previews:
+   - Choose one still image as `hero` that is the most visually stunning shot for the post.
+   - Hero output must be landscape-oriented for preview cards.
+   - If the strongest still is portrait, generate a landscape crop derivative and use that as hero.
+6. Never fabricate transcript quotes
 
 ---
 
@@ -97,6 +101,7 @@ Hard requirements:
    - Add a new BlogPost object in lib/content/local-seed.ts with:
      id, slug, title, excerpt, publishDate, authorName, category, tags, readingMinutes, hero, intro, sections, preservationLens.
    - Section shape must match existing schema/types exactly.
+   - `hero` must point to the selected standout still image for preview cards and be landscape-oriented (crop derivative allowed).
 5) Tests:
    - Update/add tests so canonical date+slug route for the new post is verified.
    - Keep old post assertions valid unless user requested migration.
@@ -116,6 +121,8 @@ Style/content constraints:
 6) Include source-filename traceability in your own working notes.
 7) No fabricated transcript quotes.
 8) If CANONICAL_SPELLINGS_OPTIONAL is provided, enforce those spellings.
+9) Pick the most visually stunning still image as `hero` for previews.
+10) Keep hero landscape; if needed, create a landscape crop from a portrait still.
 
 Source handling rules:
 1) Inspect files by extension (.jpg/.jpeg/.heic/.mov/.mp4/.m4a).
@@ -124,11 +131,12 @@ Source handling rules:
 
 Execution order:
 1) Analyze source folder and select media set.
-2) Generate assets under public/media/toronto-zoo/{{TARGET_POST_DATE}}.
-3) Update local-seed.ts with new post object.
-4) Update tests tied to canonical routing/content assumptions.
-5) Run verification commands.
-6) Return changed files + canonical URL + test results.
+2) Select the standout still image hero for preview cards and ensure landscape output.
+3) Generate assets under public/media/toronto-zoo/{{TARGET_POST_DATE}}.
+4) Update local-seed.ts with new post object.
+5) Update tests tied to canonical routing/content assumptions.
+6) Run verification commands.
+7) Return changed files + canonical URL + test results.
 
 Final response format:
 - CHANGES MADE
@@ -150,6 +158,7 @@ Final response format:
 - [ ] Video included only when suitable
 - [ ] All selected assets map to real source filenames
 - [ ] Every selected asset has alt text and caption
+- [ ] Hero uses the most visually stunning still image and is landscape-oriented (or landscape crop derivative)
 - [ ] No fabricated transcript quotes
 - [ ] `npm run typecheck` passes
 - [ ] `npm run test:unit` passes

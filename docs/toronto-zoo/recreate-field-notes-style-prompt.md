@@ -75,8 +75,12 @@ The generated post must follow these constraints:
    - Source filename traceability.
    - Alt text.
    - Caption.
-6. Do not fabricate direct transcript quotes unless transcript text is provided.
-7. If names are present, normalize spellings using `{{CANONICAL_SPELLINGS_OPTIONAL}}`.
+6. Hero selection for previews:
+   - Select one still image as the post `hero` that is the most visually stunning shot.
+   - Hero output should be landscape for preview cards.
+   - If the strongest still is portrait, create/plan a landscape crop derivative and use that as hero.
+7. Do not fabricate direct transcript quotes unless transcript text is provided.
+8. If names are present, normalize spellings using `{{CANONICAL_SPELLINGS_OPTIONAL}}`.
 
 # Single Mega Prompt (Copy/Paste)
 
@@ -124,8 +128,11 @@ Style rules (must follow):
 4) Media text requirements:
    - Alt text: clear, literal, accessibility-first
    - Caption: concise, informative, conservation or behavior context
-5) If CANONICAL_SPELLINGS_OPTIONAL is provided, enforce those spellings in all copy.
-6) Title formatting:
+5) Hero requirement:
+   - Choose the most visually stunning still image as `hero` for blog preview cards.
+   - Keep hero landscape; if needed, create a landscape crop derivative from portrait still media.
+6) If CANONICAL_SPELLINGS_OPTIONAL is provided, enforce those spellings in all copy.
+7) Title formatting:
    - If TARGET_POST_TITLE is provided, use it exactly.
    - If TARGET_POST_TITLE is missing, generate a title that follows TARGET_POST_TITLE_DEFAULT_PATTERN.
 
@@ -147,6 +154,7 @@ Return output in this exact order and heading names:
 - category:
 - tags:
 - reading_minutes:
+- hero_source_file:
 
 ## Intro
 - Paragraph 1
@@ -201,6 +209,7 @@ Provide a table with these columns:
 - Confirm each section paragraph count = 2
 - Confirm each section photo count = 2
 - Confirm each selected asset has source filename + alt text + caption
+- Confirm hero uses the strongest still image and outputs in landscape orientation (or landscape crop derivative)
 - Confirm preservation lens paragraph count = 2
 - Confirm no fabricated transcript quotes
 - Confirm family-first conservation tone
@@ -220,6 +229,7 @@ Minimum fields that must be present:
 - `category`
 - `tags`
 - `reading_minutes`
+- `hero_source_file`
 - Per selected asset: `source_filename`, `alt_text`, `caption`
 
 # Quality Gate Checklist
@@ -233,6 +243,7 @@ Mark each item pass/fail before accepting output:
 - [ ] Video highlight is included only when suitable source exists.
 - [ ] All selected assets map to real source filenames.
 - [ ] Every selected asset has alt text and caption.
+- [ ] Hero uses the most visually stunning still image and is landscape-oriented (or a landscape crop derivative).
 - [ ] No fabricated transcript quotes.
 - [ ] Family-first, educational, conservation-grounded voice is maintained.
 - [ ] Output includes both `Post Draft` and `Media Plan`.

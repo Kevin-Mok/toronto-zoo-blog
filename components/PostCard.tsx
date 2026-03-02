@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { BlogPostSummary } from '@/lib/content/types';
 import { formatPublishDate } from '@/lib/utils/date';
@@ -23,6 +24,23 @@ export function PostCard({ post }: PostCardProps) {
         <Link href={canonicalPath}>{post.title}</Link>
       </h2>
       <p className="post-card__excerpt">{post.excerpt}</p>
+      <div className="post-card__preview">
+        <Link
+          className="post-card__preview-link"
+          href={canonicalPath}
+          aria-label={`Preview image for ${post.title}`}
+        >
+          <span className="post-card__preview-frame">
+            <Image
+              src={post.hero.src}
+              alt={post.hero.alt}
+              fill
+              className="post-card__preview-image"
+              sizes="(max-width: 920px) 100vw, 50vw"
+            />
+          </span>
+        </Link>
+      </div>
 
       <div className="post-card__tags" aria-label="Post tags">
         {post.tags.slice(0, 3).map((tag) => (
