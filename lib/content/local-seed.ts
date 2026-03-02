@@ -3,8 +3,8 @@ import type { BlogPost } from '@/lib/content/types';
 export const LOCAL_POSTS: BlogPost[] = [
   {
     id: 'post-toronto-zoo-2026-02-28',
-    slug: 'toronto-zoo-field-notes',
-    title: 'Toronto Zoo Field Notes (February 28, 2026)',
+    slug: 'toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026',
+    title: 'Toronto Zoo Field Notes: Snow Leopard, Polar Bear & Gibbon Highlights (February 28, 2026)',
     excerpt:
       'Transcript-grounded animal talks with close-up media selections and conservation context for families planning an educational visit.',
     publishDate: '2026-02-28',
@@ -160,8 +160,8 @@ export const LOCAL_POSTS: BlogPost[] = [
   },
   {
     id: 'post-toronto-zoo-2026-03-01',
-    slug: 'toronto-zoo-field-notes-march-1-2026',
-    title: 'Toronto Zoo Field Notes (March 1, 2026)',
+    slug: 'toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026',
+    title: 'Toronto Zoo Field Notes: Pygmy Hippo, Penguins, Gorillas & White Lions (March 1, 2026)',
     excerpt:
       'A family-first Toronto Zoo field note combining media-backed hippo and penguin highlights with transcript-grounded gorilla and white lion updates.',
     publishDate: '2026-03-01',

@@ -2,7 +2,7 @@
 
 Provide a reusable single prompt that recreates the style and structure of:
 
-- `http://localhost:3001/blog/2026/3/1/toronto-zoo-field-notes`
+- `http://localhost:3001/blog/2026/3/1/toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026`
 
 from a mixed-media source folder (photos, videos, audio) such as:
 
@@ -34,11 +34,13 @@ Do not use this prompt for:
 - `{{REFERENCE_STYLE_URL}}`: style target URL (default: Toronto field-notes page).
 - `{{TARGET_POST_DATE}}`: publish date in `YYYY-MM-DD`.
 - `{{TARGET_POST_SLUG}}`: canonical slug (kebab-case).
+- `{{TARGET_POST_TITLE}}`: full publication title.
 
 ## Optional Inputs
 
 - `{{TARGET_SPECIES_COUNT_DEFAULT=3}}`: target number of species sections.
 - `{{CANONICAL_SPELLINGS_OPTIONAL}}`: list of spellings to enforce if names appear.
+- `{{TARGET_POST_TITLE_DEFAULT_PATTERN=Toronto Zoo Field Notes: <Species 1>, <Species 2> & <Species 3> Highlights (<Month D, YYYY>)}}`: recommended fallback title format aligned with current canonical posts.
 
 ## Supported Source Types
 
@@ -90,8 +92,10 @@ Inputs:
 - REFERENCE_STYLE_URL: {{REFERENCE_STYLE_URL}}
 - TARGET_POST_DATE: {{TARGET_POST_DATE}}
 - TARGET_POST_SLUG: {{TARGET_POST_SLUG}}
+- TARGET_POST_TITLE: {{TARGET_POST_TITLE}}
 - TARGET_SPECIES_COUNT_DEFAULT: {{TARGET_SPECIES_COUNT_DEFAULT=3}}
 - CANONICAL_SPELLINGS_OPTIONAL: {{CANONICAL_SPELLINGS_OPTIONAL}}
+- TARGET_POST_TITLE_DEFAULT_PATTERN: {{TARGET_POST_TITLE_DEFAULT_PATTERN=Toronto Zoo Field Notes: <Species 1>, <Species 2> & <Species 3> Highlights (<Month D, YYYY>)}}
 
 Source handling rules:
 1) Inspect and classify files by extension:
@@ -121,6 +125,9 @@ Style rules (must follow):
    - Alt text: clear, literal, accessibility-first
    - Caption: concise, informative, conservation or behavior context
 5) If CANONICAL_SPELLINGS_OPTIONAL is provided, enforce those spellings in all copy.
+6) Title formatting:
+   - If TARGET_POST_TITLE is provided, use it exactly.
+   - If TARGET_POST_TITLE is missing, generate a title that follows TARGET_POST_TITLE_DEFAULT_PATTERN.
 
 Fallback behavior:
 - If you cannot directly inspect media/audio content, output a "Needed Inputs" block listing missing items and continue with a best-effort draft based on filenames only.

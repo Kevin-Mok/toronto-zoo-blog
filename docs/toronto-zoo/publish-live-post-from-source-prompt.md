@@ -22,7 +22,7 @@ Unlike draft-only prompts, this one must:
 
 - `{{TARGET_AUTHOR_NAME=Toronto Zoo Blog Team}}`
 - `{{TARGET_SPECIES_COUNT_DEFAULT=3}}`
-- `{{REFERENCE_STYLE_URL=http://localhost:3001/blog/2026/2/28/toronto-zoo-field-notes}}`
+- `{{REFERENCE_STYLE_URL=http://localhost:3001/blog/2026/2/28/toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026}}`
 - `{{CANONICAL_SPELLINGS_OPTIONAL}}`
 
 ---
@@ -76,7 +76,7 @@ Inputs:
 - TARGET_POST_TITLE: {{TARGET_POST_TITLE}}
 - TARGET_AUTHOR_NAME: {{TARGET_AUTHOR_NAME=Toronto Zoo Blog Team}}
 - TARGET_SPECIES_COUNT_DEFAULT: {{TARGET_SPECIES_COUNT_DEFAULT=3}}
-- REFERENCE_STYLE_URL: {{REFERENCE_STYLE_URL=http://localhost:3001/blog/2026/2/28/toronto-zoo-field-notes}}
+- REFERENCE_STYLE_URL: {{REFERENCE_STYLE_URL=http://localhost:3001/blog/2026/2/28/toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026}}
 - CANONICAL_SPELLINGS_OPTIONAL: {{CANONICAL_SPELLINGS_OPTIONAL}}
 
 Hard requirements:
@@ -154,4 +154,3 @@ Final response format:
 - [ ] `npm run typecheck` passes
 - [ ] `npm run test:unit` passes
 - [ ] `npm run test:integration` passes
-

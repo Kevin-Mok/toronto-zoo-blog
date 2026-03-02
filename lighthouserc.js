@@ -2,7 +2,8 @@ const DEFAULT_HOST = process.env.LHCI_HOST ?? '127.0.0.1';
 const parsedPort = Number.parseInt(process.env.LHCI_PORT ?? '4273', 10);
 const DEFAULT_PORT = Number.isNaN(parsedPort) ? 4273 : parsedPort;
 const DEFAULT_BASE_URL = `http://${DEFAULT_HOST}:${DEFAULT_PORT}`;
-const DEFAULT_POST_PATH = '/blog/2026/3/1/toronto-zoo-field-notes';
+const DEFAULT_POST_PATH =
+  '/blog/2026/3/1/toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026';
 
 function normalizePath(path) {
   if (!path) {

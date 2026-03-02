@@ -2,7 +2,7 @@
 
 Provide a reusable single prompt that recreates the style and structure of:
 
-- `http://localhost:3001/blog/2026/3/1/toronto-zoo-field-notes`
+- `http://localhost:3001/blog/2026/3/1/toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026`
 
 from a mixed-media source folder (photos, videos, audio) such as:
 
@@ -31,9 +31,9 @@ Do not use this prompt for:
 ## Required Inputs
 
 - `{{SOURCE_FOLDER_PATH=/mnt/linux-files-3/hevin/03.01.26 - Toronto Zoo}}`: absolute folder path containing source media.
-- `{{REFERENCE_STYLE_URL=http://localhost:3001/blog/2026/3/1/toronto-zoo-field-notes}}`: style target URL (default: Toronto field-notes page).
+- `{{REFERENCE_STYLE_URL=http://localhost:3001/blog/2026/3/1/toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026}}`: style target URL (default: Toronto field-notes page).
 - `{{TARGET_POST_DATE=2026-03-01}}`: publish date in `YYYY-MM-DD`.
-- `{{TARGET_POST_SLUG=toronto-zoo-field-notes}}`: canonical slug (kebab-case).
+- `{{TARGET_POST_SLUG=toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026}}`: canonical slug (kebab-case).
 
 ## Optional Inputs
 

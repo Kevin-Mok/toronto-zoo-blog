@@ -3,7 +3,7 @@
 ## Checklist
 
 - [x] Generate and place media assets for the 2026-03-01 post in `public/media/toronto-zoo/2026-03-01`
-- [x] Replace fallback seed content for `toronto-zoo-field-notes` with the new hippo/penguin/gorilla article
+- [x] Replace fallback seed content for `toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026` with the new hippo/penguin/gorilla article
 - [x] Update tests coupled to old species headings/canonical copy assumptions
 - [x] Run typecheck + unit + integration tests and record verification results
 

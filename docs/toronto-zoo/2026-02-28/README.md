@@ -1,7 +1,7 @@
 # Toronto Zoo Audio Transcripts (2026-02-28)
 
 This folder stores offline transcript artifacts for the Toronto Zoo blog page at:
-`/blog/2026/3/1/toronto-zoo-field-notes`
+`/blog/2026/2/28/toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026`
 
 ## Source recordings
 

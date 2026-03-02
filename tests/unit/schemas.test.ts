@@ -9,7 +9,11 @@ describe('blog schema contracts', () => {
   });
 
   it('preserves canonical spellings in the original Toronto post', () => {
-    const originalPost = LOCAL_POSTS.find((post) => post.slug === 'toronto-zoo-field-notes');
+    const originalPost = LOCAL_POSTS.find(
+      (post) =>
+        post.slug ===
+        'toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026',
+    );
     expect(originalPost).toBeDefined();
 
     const joined = JSON.stringify(originalPost);
@@ -19,7 +23,11 @@ describe('blog schema contracts', () => {
   });
 
   it('contains expected sections in the March Toronto post', () => {
-    const marchPost = LOCAL_POSTS.find((post) => post.slug === 'toronto-zoo-field-notes-march-1-2026');
+    const marchPost = LOCAL_POSTS.find(
+      (post) =>
+        post.slug ===
+        'toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026',
+    );
     expect(marchPost).toBeDefined();
     const titles = marchPost?.content.sections.map((section) => section.title) ?? [];
     expect(titles).toEqual([

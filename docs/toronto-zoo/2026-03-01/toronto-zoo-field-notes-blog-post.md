@@ -1,11 +1,11 @@
-# Toronto Zoo Field Notes (March 1, 2026)
+# Toronto Zoo Field Notes: Pygmy Hippo, Penguins, Gorillas & White Lions (March 1, 2026)
 
 ## Excerpt
 A family-first Toronto Zoo field note combining media-backed hippo and penguin highlights with transcript-grounded gorilla and white lion updates.
 
 ## Metadata
 - publish_date: 2026-03-01
-- slug: toronto-zoo-field-notes
+- slug: toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026
 - category: field-notes
 - tags: family-guide, toronto-zoo, pygmy-hippo, penguin, gorilla, white-lion
 - reading_minutes: 8

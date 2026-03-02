@@ -100,7 +100,7 @@ npm run perf:lhci:logs -- --collect.numberOfRuns=1
 Target a specific post URL (for example a canonical date/title path) without editing config:
 
 ```bash
-LHCI_POST_PATH=/blog/2026/3/1/toronto-zoo-field-notes npm run perf:lhci:logs
+LHCI_POST_PATH=/blog/2026/3/1/toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026 npm run perf:lhci:logs
 ```
 
 ## Docker Deployment

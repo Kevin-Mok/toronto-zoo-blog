@@ -20,9 +20,9 @@ describe('post path utils', () => {
     expect(
       getPostCanonicalPath({
         publishDate: '2026-03-01',
-        slug: 'toronto-zoo-field-notes',
+        slug: 'toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026',
       }),
-    ).toBe('/blog/2026/3/1/toronto-zoo-field-notes');
+    ).toBe('/blog/2026/3/1/toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026');
   });
 
   it('builds archive day path from publish date', () => {

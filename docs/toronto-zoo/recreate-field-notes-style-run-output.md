@@ -1,18 +1,18 @@
 # Needed Inputs (only if required)
-- Confirm final slug. This run uses `toronto-zoo-field-notes` from the prompt defaults.
+- Confirm final slug. This run uses `toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026` from the prompt defaults.
 - Confirm publication-level species labels if you want stricter taxonomy wording in final copy. Visual checks support pygmy hippo, African penguin, and western lowland gorilla.
 - Provide transcripts for `lion*.m4a` and `species*.m4a` if you want transcript-grounded lion coverage in this draft.
 
 # Post Draft
 ## Title
-Toronto Zoo Field Notes (March 1, 2026)
+Toronto Zoo Field Notes: Pygmy Hippo, Penguins, Gorillas & White Lions (March 1, 2026)
 
 ## Excerpt
 A family-first Toronto Zoo field note focused on pygmy hippo, penguin, and gorilla behavior, with practical media picks and conservation context.
 
 ## Metadata
 - publish_date: 2026-03-01
-- slug: toronto-zoo-field-notes
+- slug: toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026
 - category: field-notes
 - tags: family-guide, toronto-zoo, pygmy-hippo, penguin, gorilla
 - reading_minutes: 7

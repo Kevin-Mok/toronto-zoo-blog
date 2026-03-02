@@ -2,7 +2,7 @@
 
 Offline transcript files used for the Toronto Zoo recreated post:
 
-- Route: `/blog/2026/3/1/toronto-zoo-field-notes`
+- Route: `/blog/2026/2/28/toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026`
 - Source page reference: `/home/kevin/coding/portfolio-site/app/toronto-zoo/2026/2/28/page.tsx`
 
 ## Files
