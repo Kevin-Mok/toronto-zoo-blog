@@ -1,0 +1,12 @@
+.rw-rw-r-- kevin kevin 672B Sun Mar  1 19:10:45 2026 lion.txt
+.rw-rw-r-- kevin kevin 4.4K Sun Mar  1 19:24:23 2026 lion 2.txt
+.rw-rw-r-- kevin kevin 1.1K Sun Mar  1 19:06:36 2026 lion 3.txt
+.rw-rw-r-- kevin kevin 896B Sun Mar  1 19:24:20 2026 lion 10.txt
+.rw-rw-r-- kevin kevin 978B Sun Mar  1 18:19:27 2026 lion 15.txt
+.rw-rw-r-- kevin kevin 531B Sun Mar  1 19:06:55 2026 lion 3p.txt
+.rw-rw-r-- kevin kevin 2.1K Sun Mar  1 19:07:48 2026 lion 5p.txt
+.rw-rw-r-- kevin kevin 2.2K Sun Mar  1 19:24:26 2026 lion 6.txt
+.rw-rw-r-- kevin kevin 1.3K Sun Mar  1 19:24:31 2026 lion interview.txt
+.rw-rw-r-- kevin kevin 659B Sun Mar  1 19:12:13 2026 species.txt
+.rw-rw-r-- kevin kevin 392B Sun Mar  1 19:11:12 2026 species 2.txt
+.rw-rw-r-- kevin kevin 1.6K Sun Mar  1 19:11:56 2026 species 50.txt
