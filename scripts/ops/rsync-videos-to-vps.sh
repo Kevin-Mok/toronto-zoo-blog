@@ -19,7 +19,7 @@ Examples:
 Notes:
   - Default host: kevin@51.222.111.61
   - Default repo path: /home/kevin/zoo-blog
-  - Syncs image and video files under public/media/**/{images,videos}/ to the same path on VPS.
+  - Syncs root media assets plus files under public/media/**/{images,videos}/ to the same path on VPS.
   - Requires rsync + ssh on local machine and rsync on VPS.
 USAGE
   exit 1
@@ -40,7 +40,7 @@ REMOTE_MEDIA_DIR="${REMOTE_REPO_PATH}/public/media"
 echo "Ensuring remote media path exists: ${REMOTE_HOST}:${REMOTE_MEDIA_DIR}"
 ssh "${REMOTE_HOST}" "mkdir -p '${REMOTE_MEDIA_DIR}'"
 
-echo "Syncing image/video media from ${LOCAL_MEDIA_DIR} to ${REMOTE_HOST}:${REMOTE_MEDIA_DIR}"
+echo "Syncing media assets from ${LOCAL_MEDIA_DIR} to ${REMOTE_HOST}:${REMOTE_MEDIA_DIR}"
 rsync \
   --archive \
   --compress \
@@ -48,6 +48,7 @@ rsync \
   --progress \
   --prune-empty-dirs \
   --include='*/' \
+  --include='/*' \
   --include='images/***' \
   --include='videos/***' \
   --exclude='*' \
