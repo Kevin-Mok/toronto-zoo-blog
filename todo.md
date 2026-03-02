@@ -1,1 +1,19 @@
-- blog preview pics
+- questions
+  - reusable script to ask zookeepers
+- edit blog content
+- table of contents for each post
+  - sections with linkable URL's
+- content type: stereotypies criticism
+- view count
+  - backend counter
+- comment section
+- create email/contact section
+- habitat review
+- flesh out tags
+  - able to choose posts based on tag
+- image enlargement with animation from Kanban
+  - image popup overlay
+  - /home/kevin/coding/kanban-calendar
+- generate on server
+- setup social media 
+  - icon links to accounts
