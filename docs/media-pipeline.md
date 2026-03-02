@@ -20,7 +20,7 @@ Manifest:
 
 ## Constraints Enforced
 
-- Per animal: exactly 2 highlighted photos.
+- Per animal section: either 0 photos (transcript-only) or exactly 2 highlighted photos (media-backed).
 - Per animal: 1 highlighted video where source media exists.
 - All images include captions in rendered UI.
 - Desktop photo pairs render as two columns.
@@ -32,6 +32,19 @@ Manifest:
 Stored under:
 
 - `docs/toronto-zoo/2026-02-28/transcripts/`
+
+Reusable transcription script:
+
+```bash
+scripts/media/transcribe-m4a-to-repo.sh --input-dir "/mnt/linux-files-3/hevin/03.01.26 - Toronto Zoo"
+```
+
+Behavior:
+
+- Detects `.m4a` files in the input directory.
+- Infers date from folder name (for example `03.01.26` -> `2026-03-01`).
+- Writes transcripts to `docs/toronto-zoo/<YYYY-MM-DD>/transcripts/`.
+- Defaults to Whisper `base.en` model.
 
 Canonical spellings in authored copy:
 
