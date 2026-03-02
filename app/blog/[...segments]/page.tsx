@@ -140,6 +140,9 @@ function getBlogOgImageUrl(canonicalPath: string): string {
   return `${SITE_URL}/blog/opengraph-image/${segmentPath}`;
 }
 
+const MARCH_1_2026_POST_SLUG = 'toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026';
+const MARCH_1_2026_OG_IMAGE_URL = `${SITE_URL}/media/toronto-zoo/2026-03-01/images/opengraph-image.jpg`;
+
 function archiveMetadata(
   title: string,
   description: string,
@@ -186,7 +189,13 @@ function postMetadata(post: Awaited<ReturnType<typeof getPostBySlug>>): Metadata
   const summary = post.excerpt.trim();
   const canonicalPath = getPostCanonicalPath(post);
   const absoluteUrl = `${SITE_URL}${canonicalPath}`;
-  const ogImageUrl = getBlogOgImageUrl(canonicalPath);
+  const hasFixedOgImage = post.slug === MARCH_1_2026_POST_SLUG;
+  const ogImageUrl = hasFixedOgImage ? MARCH_1_2026_OG_IMAGE_URL : getBlogOgImageUrl(canonicalPath);
+  const ogImageWidth = hasFixedOgImage ? 1024 : 1200;
+  const ogImageHeight = hasFixedOgImage ? 541 : 630;
+  const ogImageAlt = hasFixedOgImage
+    ? 'African Penguin Talk preview card for the March 1, 2026 Toronto Zoo field notes post.'
+    : `${post.title} preview card`;
 
   return {
     title: post.title,
@@ -204,9 +213,9 @@ function postMetadata(post: Awaited<ReturnType<typeof getPostBySlug>>): Metadata
       images: [
         {
           url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: `${post.title} preview card`,
+          width: ogImageWidth,
+          height: ogImageHeight,
+          alt: ogImageAlt,
         },
       ],
     },

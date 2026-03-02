@@ -35,6 +35,8 @@ const OG_SIZE = {
   width: 1200,
   height: 630,
 };
+const OG_FALLBACK_BACKGROUND_PATH = '/media/opengraph-image-resized.jpg';
+const SUPPORTED_OG_IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png']);
 
 function normalizeNumberSegment(value: string): string {
   return String(Number.parseInt(value, 10));
@@ -137,6 +139,22 @@ function toAbsoluteAssetUrl(src: string, requestOrigin: string): string {
   return new URL(src, requestOrigin).toString();
 }
 
+function resolveOgBackgroundImageUrl(src: string, requestOrigin: string): string {
+  const absoluteUrl = toAbsoluteAssetUrl(src, requestOrigin);
+
+  try {
+    const pathname = new URL(absoluteUrl).pathname.toLowerCase();
+    const extensionMatch = pathname.match(/\.[a-z0-9]+$/);
+    if (extensionMatch && SUPPORTED_OG_IMAGE_EXTENSIONS.has(extensionMatch[0])) {
+      return absoluteUrl;
+    }
+  } catch {
+    // Fall back to a known compatible asset when URL parsing fails.
+  }
+
+  return toAbsoluteAssetUrl(OG_FALLBACK_BACKGROUND_PATH, requestOrigin);
+}
+
 function buildFallbackCardContent(): OgCardContent {
   return {
     kind: 'generic',
@@ -177,7 +195,7 @@ function buildPostCardContent(post: BlogPost, requestOrigin: string): OgCardCont
   return {
     kind: 'post',
     title: truncate(post.title, 110),
-    imageUrl: toAbsoluteAssetUrl(post.hero.src, requestOrigin),
+    imageUrl: resolveOgBackgroundImageUrl(post.hero.src, requestOrigin),
     logoUrl: toAbsoluteAssetUrl('/media/logo-word.png', requestOrigin),
   };
 }
@@ -220,7 +238,6 @@ function renderCard(content: OgCardContent) {
         <div
           style={{
             position: 'relative',
-            zIndex: 2,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
@@ -287,7 +304,6 @@ function renderCard(content: OgCardContent) {
           flexDirection: 'column',
           gap: 20,
           maxWidth: 1000,
-          zIndex: 2,
         }}
       >
         <p
