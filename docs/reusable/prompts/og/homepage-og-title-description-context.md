@@ -4,7 +4,7 @@ Provide context and reusable prompts for generating high-quality homepage `og:ti
 
 Use this with:
 
-- [homepage-og-image-prompt.md](/home/kevin/coding/zoo-blog/docs/homepage-og-image-prompt.md)
+- [homepage-og-image-prompt.md](/home/kevin/coding/zoo-blog/docs/reusable/prompts/og/homepage-og-image-prompt.md)
 
 # Brand Context To Preserve
 
@@ -159,4 +159,3 @@ Return format:
 - [ ] Tone matches Toronto Zoo Report editorial voice.
 - [ ] No clickbait or inflated claims.
 - [ ] Final pair is easy to scan in social previews.
-

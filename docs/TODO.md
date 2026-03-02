@@ -619,10 +619,11 @@ Progress note (2026-03-02):
 - Implemented `app/opengraph-image.tsx` and `app/blog/opengraph-image/[...segments]/route.tsx` with branded `ImageResponse` cards plus fallback rendering for invalid/missing post contexts.
 - Updated metadata wiring in `app/layout.tsx` and `app/blog/[...segments]/page.tsx` to use dynamic OG image URLs for homepage, archive pages, and canonical post pages, including Twitter summary-large-image metadata.
 - Updated blog post OG card composition to use each post's hero image as the background with only title + Toronto Zoo Report logo treatment.
+- Fixed OG runtime compatibility by falling back to `/media/opengraph-image-resized.jpg` when post hero sources use unsupported `next/og` formats (for example `.webp`), and removed `zIndex` styles that triggered unitless-value rendering warnings in `ImageResponse`.
 - Locked homepage social copy to:
   - Title: `Toronto Zoo Report: animal updates and keeper talks`
   - Description: `Explore the blog for animal updates, keeper-talk summaries, and conservation context from on-site visits to the Toronto Zoo.`
-- Added dedicated manual image build spec at `docs/homepage-og-image-generation-spec.md`, and switched homepage metadata image source to static `/media/opengraph-image-resized.jpg`.
+- Added dedicated manual image build spec at `docs/reusable/prompts/og/homepage-og-image-generation-spec.md`, and switched homepage metadata image source to static `/media/opengraph-image-resized.jpg`.
 - Local verification completed: `npm run typecheck`, `npm run lint`, and `npm run build` all pass.
 - Remaining before checking `[x]`: manual OG URL fetch check in a running server and external social debugger checks against a deployed URL.
 

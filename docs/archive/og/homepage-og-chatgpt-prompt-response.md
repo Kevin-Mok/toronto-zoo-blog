@@ -57,6 +57,6 @@
 
 Image-generation implementation details were moved into:
 
-- `/home/kevin/coding/zoo-blog/docs/homepage-og-image-generation-spec.md`
+- `/home/kevin/coding/zoo-blog/docs/reusable/prompts/og/homepage-og-image-generation-spec.md`
 
 That file now contains the extracted `IMAGE_GENERATION_PROMPT`, `NEGATIVE_PROMPT`, and a cleaned QA checklist for manual OG image creation.

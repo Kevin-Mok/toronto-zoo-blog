@@ -10,7 +10,7 @@ This prompt is designed to improve social preview quality by enforcing practical
 
 Related context doc:
 
-- [homepage-og-title-description-context.md](/home/kevin/coding/zoo-blog/docs/homepage-og-title-description-context.md)
+- [homepage-og-title-description-context.md](/home/kevin/coding/zoo-blog/docs/reusable/prompts/og/homepage-og-title-description-context.md)
 
 # When To Use
 

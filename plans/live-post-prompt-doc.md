@@ -9,7 +9,7 @@
 
 ## Review
 
-Added `docs/toronto-zoo/publish-live-post-from-source-prompt.md`, a reusable publish-to-site prompt that:
+Added `docs/toronto-zoo/templates/publish-live-post-from-source-prompt.md`, a reusable publish-to-site prompt that:
 - accepts source folder + date + slug + title inputs
 - requires real repo edits (media generation + `local-seed.ts` update + tests)
 - preserves existing posts and enforces slug-safety

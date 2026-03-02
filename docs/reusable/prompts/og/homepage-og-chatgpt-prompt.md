@@ -3,13 +3,13 @@
 Use this doc to generate full homepage Open Graph outputs (copy + image prompt + QA) in one run.
 
 Implementation artifacts from the latest run:
-- `/home/kevin/coding/zoo-blog/docs/homepage-og-chatgpt-prompt-response.md`
-- `/home/kevin/coding/zoo-blog/docs/homepage-og-image-generation-spec.md`
+- `/home/kevin/coding/zoo-blog/docs/archive/og/homepage-og-chatgpt-prompt-response.md`
+- `/home/kevin/coding/zoo-blog/docs/reusable/prompts/og/homepage-og-image-generation-spec.md`
 
 ## Files To Upload To ChatGPT
 
-1. `docs/homepage-og-image-prompt.md`
-2. `docs/homepage-og-title-description-context.md`
+1. `docs/reusable/prompts/og/homepage-og-image-prompt.md`
+2. `docs/reusable/prompts/og/homepage-og-title-description-context.md`
 3. `public/media/logo-word.png`
 4. `public/media/hero-image.png`
 
