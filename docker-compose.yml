@@ -18,7 +18,7 @@ services:
     environment:
       KEY: change-me-directus-key
       SECRET: change-me-directus-secret
-      ADMIN_EMAIL: admin@torontozooblog.com
+      ADMIN_EMAIL: admin@torontozooreport.com
       ADMIN_PASSWORD: change-me-admin-password
       DB_CLIENT: pg
       DB_HOST: postgres
@@ -42,7 +42,7 @@ services:
     volumes:
       - ./public/media:/app/public/media:ro
     environment:
-      NEXT_PUBLIC_SITE_URL: https://torontozooblog.com
+      NEXT_PUBLIC_SITE_URL: https://torontozooreport.com
       DATABASE_URL: postgresql://zoo:zoo@postgres:5432/zoo_blog
       DIRECTUS_URL: http://directus:8055
       DIRECTUS_TOKEN: ${DIRECTUS_TOKEN:-}

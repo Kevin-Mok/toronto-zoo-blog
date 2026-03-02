@@ -273,7 +273,7 @@ NGINX_ENABLED_LINK="/etc/nginx/sites-enabled/${DOMAIN}.conf"
 
 if [[ -z "$ADMIN_EMAIL" ]]; then
   CURRENT_ADMIN_EMAIL="$(get_yaml_value "ADMIN_EMAIL" "$COMPOSE_FILE")"
-  if [[ -n "$CURRENT_ADMIN_EMAIL" && "$CURRENT_ADMIN_EMAIL" != "admin@torontozooblog.com" ]]; then
+  if [[ -n "$CURRENT_ADMIN_EMAIL" && "$CURRENT_ADMIN_EMAIL" != "admin@torontozooreport.com" ]]; then
     ADMIN_EMAIL="$CURRENT_ADMIN_EMAIL"
   else
     ADMIN_EMAIL="admin@${DOMAIN}"
