@@ -66,4 +66,16 @@ describe('content provider', () => {
       'toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026',
     );
   });
+
+  it('returns rounded Toronto weather summaries for existing Toronto posts', async () => {
+    const [febPost, marchPost] = await Promise.all([
+      getPostBySlug('toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026'),
+      getPostBySlug('toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026'),
+    ]);
+
+    expect(febPost?.weatherSummary).toBe('Toronto weather: -1°C');
+    expect(marchPost?.weatherSummary).toBe('Toronto weather: -10°C');
+    expect(febPost?.weatherSummary).not.toMatch(/\d+\.\d+/);
+    expect(marchPost?.weatherSummary).not.toMatch(/\d+\.\d+/);
+  });
 });

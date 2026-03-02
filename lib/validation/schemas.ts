@@ -28,6 +28,7 @@ export const blogPostSchema = z.object({
   excerpt: z.string().min(1),
   publishDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   authorName: z.string().min(1),
+  weatherSummary: z.string().min(1).optional(),
   category: z.enum(['field-notes', 'conservation', 'engineering']),
   tags: z.array(z.string().min(1)).min(1),
   readingMinutes: z.number().int().positive(),

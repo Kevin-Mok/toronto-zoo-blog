@@ -431,6 +431,7 @@ export default async function BlogSegmentsPage({ params }: BlogSegmentsPageProps
               <span aria-hidden="true">•</span>
               <span>{post.authorName}</span>
             </div>
+            {post.weatherSummary ? <p className="blog-post__weather">{post.weatherSummary}</p> : null}
           </header>
 
           <section className="intro-stack">

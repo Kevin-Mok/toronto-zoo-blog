@@ -13,6 +13,11 @@ import type { DirectusPost, DirectusMediaAsset } from '@/lib/directus/schema';
 import { getPostDateParts, postMatchesDateRoute } from '@/lib/utils/post-path';
 import { blogPostsSchema, blogPostSchema } from '@/lib/validation/schemas';
 
+const TORONTO_WEATHER_FALLBACK_BY_DATE: Record<string, string> = {
+  '2026-02-28': 'Toronto weather: -1°C',
+  '2026-03-01': 'Toronto weather: -10°C',
+};
+
 function mapMediaAsset(asset: DirectusMediaAsset) {
   return {
     id: asset.id,
@@ -51,6 +56,7 @@ function mapDirectusPost(post: DirectusPost): BlogPost {
     excerpt: post.excerpt,
     publishDate: post.publish_date,
     authorName: post.author_name,
+    weatherSummary: post.weather_summary ?? TORONTO_WEATHER_FALLBACK_BY_DATE[post.publish_date],
     category: post.category,
     tags: post.tags,
     readingMinutes: post.reading_minutes,

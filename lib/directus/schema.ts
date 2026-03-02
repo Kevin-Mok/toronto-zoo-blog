@@ -27,6 +27,7 @@ export interface DirectusPost {
   excerpt: string;
   publish_date: string;
   author_name: string;
+  weather_summary?: string | null;
   category: 'field-notes' | 'conservation' | 'engineering';
   tags: string[];
   reading_minutes: number;

@@ -415,6 +415,13 @@ a {
   font-size: 0.92rem;
 }
 
+.blog-post__weather {
+  margin: 0.45rem 0 0;
+  color: #48634a;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
 .category-strip {
   margin-top: 1rem;
   display: flex;

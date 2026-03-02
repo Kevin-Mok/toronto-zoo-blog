@@ -10,6 +10,7 @@
 - `excerpt` (string)
 - `publish_date` (date)
 - `author_name` (string)
+- `weather_summary` (string, optional; rounded Toronto average-temperature text)
 - `category` (`field-notes` | `conservation` | `engineering`)
 - `tags` (string[])
 - `reading_minutes` (number)

@@ -43,4 +43,15 @@ describe('blog schema contracts', () => {
     expect(lionSection?.photos.length).toBe(0);
     expect(lionSection?.video).toBeUndefined();
   });
+
+  it('stores rounded Toronto weather summaries in local seed posts', () => {
+    const zooPosts = LOCAL_POSTS.filter((post) => post.slug.startsWith('toronto-zoo-field-notes-'));
+    expect(zooPosts.length).toBeGreaterThan(0);
+
+    for (const post of zooPosts) {
+      expect(post.weatherSummary).toBeDefined();
+      expect(post.weatherSummary).toMatch(/^Toronto weather: -?\d+°C$/);
+      expect(post.weatherSummary).not.toMatch(/\d+\.\d+/);
+    }
+  });
 });

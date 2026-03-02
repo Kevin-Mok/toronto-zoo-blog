@@ -28,6 +28,7 @@ export interface BlogPost {
   excerpt: string;
   publishDate: string;
   authorName: string;
+  weatherSummary?: string;
   category: BlogCategory;
   tags: string[];
   readingMinutes: number;

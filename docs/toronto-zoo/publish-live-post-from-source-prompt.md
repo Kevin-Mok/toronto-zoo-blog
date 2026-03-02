@@ -24,6 +24,7 @@ Unlike draft-only prompts, this one must:
 - `{{TARGET_SPECIES_COUNT_DEFAULT=3}}`
 - `{{REFERENCE_STYLE_URL=http://localhost:3001/blog/2026/2/28/toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026}}`
 - `{{CANONICAL_SPELLINGS_OPTIONAL}}`
+- `{{TARGET_WEATHER_CITY=Toronto}}`
 
 ---
 
@@ -61,6 +62,7 @@ Do not create a docs-only result. The result must be an actual post available at
    - Hero output must be landscape-oriented for preview cards.
    - If the strongest still is portrait, generate a landscape crop derivative and use that as hero.
 6. Never fabricate transcript quotes
+7. Include Toronto weather average-temperature text for `TARGET_POST_DATE` using a 09:30-16:30 local-time window and rounded whole-degree Celsius values.
 
 ---
 
@@ -82,6 +84,7 @@ Inputs:
 - TARGET_SPECIES_COUNT_DEFAULT: {{TARGET_SPECIES_COUNT_DEFAULT=3}}
 - REFERENCE_STYLE_URL: {{REFERENCE_STYLE_URL=http://localhost:3001/blog/2026/2/28/toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026}}
 - CANONICAL_SPELLINGS_OPTIONAL: {{CANONICAL_SPELLINGS_OPTIONAL}}
+- TARGET_WEATHER_CITY: {{TARGET_WEATHER_CITY=Toronto}}
 
 Hard requirements:
 1) Preserve existing posts:
@@ -99,9 +102,10 @@ Hard requirements:
    - Capture width/height and duration values via identify/ffprobe for seed data.
 4) Content model update:
    - Add a new BlogPost object in lib/content/local-seed.ts with:
-     id, slug, title, excerpt, publishDate, authorName, category, tags, readingMinutes, hero, intro, sections, preservationLens.
+     id, slug, title, excerpt, publishDate, authorName, weatherSummary, category, tags, readingMinutes, hero, intro, sections, preservationLens.
    - Section shape must match existing schema/types exactly.
    - `hero` must point to the selected standout still image for preview cards and be landscape-oriented (crop derivative allowed).
+   - `weatherSummary` must follow: "Toronto weather: <int>°C".
 5) Tests:
    - Update/add tests so canonical date+slug route for the new post is verified.
    - Keep old post assertions valid unless user requested migration.
@@ -123,6 +127,11 @@ Style/content constraints:
 8) If CANONICAL_SPELLINGS_OPTIONAL is provided, enforce those spellings.
 9) Pick the most visually stunning still image as `hero` for previews.
 10) Keep hero landscape; if needed, create a landscape crop from a portrait still.
+11) Build `weatherSummary` from Toronto weather on TARGET_POST_DATE using local 09:30-16:30 window:
+    - derive window high and low,
+    - compute average as `(high + low) / 2`,
+    - round to nearest whole degree,
+    - output as `Toronto weather: <int>°C`.
 
 Source handling rules:
 1) Inspect files by extension (.jpg/.jpeg/.heic/.mov/.mp4/.m4a).
@@ -160,6 +169,7 @@ Final response format:
 - [ ] Every selected asset has alt text and caption
 - [ ] Hero uses the most visually stunning still image and is landscape-oriented (or landscape crop derivative)
 - [ ] No fabricated transcript quotes
+- [ ] Weather summary is present and uses whole-degree Toronto average format (`Toronto weather: <int>°C`)
 - [ ] `npm run typecheck` passes
 - [ ] `npm run test:unit` passes
 - [ ] `npm run test:integration` passes

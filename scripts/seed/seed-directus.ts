@@ -20,6 +20,7 @@ async function main() {
       excerpt: post.excerpt,
       publish_date: post.publishDate,
       author_name: post.authorName,
+      weather_summary: post.weatherSummary ?? null,
       category: post.category,
       tags: post.tags,
       reading_minutes: post.readingMinutes,
