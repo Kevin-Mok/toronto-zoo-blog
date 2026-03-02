@@ -612,6 +612,75 @@ Risks and edge cases:
 Kickoff prompt for agent:
 - "Create and validate an editorial editing runbook for Directus-backed posts with revalidation and rollback steps."
 
+### [ ] dynamic opengraph preview images
+- generate share cards from post metadata
+
+Goal:
+- Generate dynamic Open Graph images for posts and archive pages so shared links have consistent, branded previews.
+
+Why it matters:
+- Improves click-through and visual consistency when links are shared on social platforms and messaging apps.
+- Removes dependency on manually curated hero-image framing for social previews.
+
+Current repo baseline:
+- Metadata is generated in `app/blog/[...segments]/page.tsx`.
+- Post Open Graph images currently point to `post.hero.src`.
+- No dynamic OG image generation route currently exists.
+
+Implementation approach:
+- Use Next.js OG image generation (`ImageResponse`) to render dynamic preview cards.
+- Add per-route OG image handler for blog post/date archive segments.
+- Keep fallback behavior for missing or invalid post data.
+
+Step-by-step implementation:
+1. Add `app/blog/[...segments]/opengraph-image.tsx` with `ImageResponse`.
+2. Resolve segment type (post/year/month/day) similarly to the page route parser.
+3. Fetch post or archive context using existing query helpers.
+4. Render branded OG card containing:
+   - site label,
+   - post/archive title,
+   - publish date for post pages,
+   - optional tag/category chips,
+   - simplified background/hero accent.
+5. Add a robust fallback card for missing content (title + site brand only).
+6. Update `generateMetadata` in `app/blog/[...segments]/page.tsx` to point `openGraph.images` to the dynamic OG route URL.
+7. Add optional base OG route for non-blog pages (`app/opengraph-image.tsx`) for consistency.
+8. Ensure fonts and assets used by OG renderer are available in the runtime environment.
+9. Add caching strategy (`revalidate`) so OG images update with content changes but do not regenerate on every request.
+10. Verify social parsers can fetch the OG route publicly.
+
+Concrete file/model/API touchpoints:
+- `app/blog/[...segments]/opengraph-image.tsx` (new).
+- `app/blog/[...segments]/page.tsx` (metadata image URL changes).
+- `app/opengraph-image.tsx` (optional default route).
+- `lib/site.ts` (absolute URL helpers if needed for OG links).
+- `app/globals.css` is not used by `ImageResponse`; style must be embedded in renderer component.
+
+Acceptance criteria:
+- Every canonical blog post URL resolves to a dynamic OG image URL.
+- Archive pages (year/month/day) also resolve to valid OG previews.
+- Shared links display branded preview cards with readable titles.
+- Missing content falls back to a safe default OG image instead of broken previews.
+
+Validation checklist:
+- `npm run typecheck`
+- `npm run lint`
+- `npm run build`
+- Open generated OG URL directly in browser:
+  - `http://localhost:3000/blog/2026/3/1/<slug>/opengraph-image`
+- Validate response headers include image content type.
+- Run social debugger checks (for production URL):
+  - Facebook Sharing Debugger
+  - X Card Validator (or equivalent link preview check)
+
+Risks and edge cases:
+- OG rendering can fail if unsupported fonts/assets are referenced.
+- Large image complexity can increase render time.
+- Social platform cache staleness can delay new preview visibility.
+
+Kickoff prompt for agent:
+- "Implement dynamic OG image generation for blog segments using `ImageResponse`, wire metadata to the new route, and add fallback rendering for missing content."
+
 ### [ ] generate on server
 
 Goal:
@@ -892,6 +961,7 @@ Kickoff prompt for agent:
 - Add optional post content blocks for `habitatReview` and stereotypy-focused analysis.
 - Add CLI contract for editorial question pack generation.
 - Add newsletter contracts: `POST /api/newsletter/subscribe`, `GET /api/newsletter/confirm`, `POST /api/newsletter/unsubscribe`.
+- Add dynamic OG image contract for blog routes (file-based `opengraph-image.tsx` with `ImageResponse`).
 
 ## Implementation Dependencies
 
@@ -899,6 +969,7 @@ Kickoff prompt for agent:
 - TOC and image overlay depend only on post-render UI files and can run in parallel.
 - Tags route should land before any advanced category/content-type expansion.
 - Comments and views both require Prisma schema changes and should be sequenced to avoid migration conflicts.
+- Dynamic OG previews depend on stable metadata fields and should ship before broader social/distribution pushes.
 - Habitat review and stereotypy content-type changes should be batched with schema/test updates.
 - Newsletter depends on Mailgun sender setup from contact flow plus stable post-query access for weekly digest generation and should remain low-priority until contact notifications are stable.
 

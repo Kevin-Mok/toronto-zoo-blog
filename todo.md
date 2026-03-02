@@ -17,5 +17,7 @@
 - generate on server
 - setup social media 
   - icon links to accounts
+- dynamic opengraph preview images
+  - generate share cards from post metadata
 - newsletter (low priority)
   - mailgun subscribe + auto weekly digest from weekly posts
