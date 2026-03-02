@@ -4,12 +4,14 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 
-const DEFAULT_OG_IMAGE = '/opengraph-image';
+const DEFAULT_OG_IMAGE = '/media/opengraph-image-resized.jpg';
 const HOMEPAGE_OG_TITLE = 'Toronto Zoo Report: animal updates and keeper talks';
 const HOMEPAGE_OG_IMAGE_ALT =
   'Open Graph card for Toronto Zoo Report with a snow leopard resting in snow as the background, the TorontoZooReport wordmark, a short headline and description, and an "Explore Blog" button.';
 const HOMEPAGE_TWITTER_IMAGE_ALT =
   'Snow leopard background with TorontoZooReport branding, a clear headline and description about animal updates and conservation context, and an "Explore Blog" call-to-action.';
+const HOMEPAGE_OG_IMAGE_WIDTH = 1024;
+const HOMEPAGE_OG_IMAGE_HEIGHT = 541;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -27,8 +29,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: DEFAULT_OG_IMAGE,
-        width: 1200,
-        height: 630,
+        width: HOMEPAGE_OG_IMAGE_WIDTH,
+        height: HOMEPAGE_OG_IMAGE_HEIGHT,
         alt: HOMEPAGE_OG_IMAGE_ALT,
       },
     ],

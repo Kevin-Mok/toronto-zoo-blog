@@ -622,7 +622,7 @@ Progress note (2026-03-02):
 - Locked homepage social copy to:
   - Title: `Toronto Zoo Report: animal updates and keeper talks`
   - Description: `Explore the blog for animal updates, keeper-talk summaries, and conservation context from on-site visits to the Toronto Zoo.`
-- Added dedicated manual image build spec at `docs/homepage-og-image-generation-spec.md`, and kept runtime homepage OG image source at `/opengraph-image` until custom image export is ready.
+- Added dedicated manual image build spec at `docs/homepage-og-image-generation-spec.md`, and switched homepage metadata image source to static `/media/opengraph-image-resized.jpg`.
 - Local verification completed: `npm run typecheck`, `npm run lint`, and `npm run build` all pass.
 - Remaining before checking `[x]`: manual OG URL fetch check in a running server and external social debugger checks against a deployed URL.
 
