@@ -17,3 +17,5 @@
 - generate on server
 - setup social media 
   - icon links to accounts
+- newsletter (low priority)
+  - mailgun subscribe + auto weekly digest from weekly posts

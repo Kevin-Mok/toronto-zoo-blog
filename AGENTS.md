@@ -206,6 +206,7 @@ Output format:
 - If unrelated changes exist, split them into individual commits by concern; never bundle unrelated work in a single commit.
 - Use [Conventional Commits](https://www.conventionalcommits.org/) format.
 - Prefer a follow-up refactor commit after behavior is stable.
+- After each successful commit, push it in the same task by default (`git push` to the active remote/branch), unless the user explicitly asks not to push.
 
 ### 4.3 Update Docs with Changes
 
@@ -287,6 +288,7 @@ Before merging:
 - [ ] Documentation updated
 - [ ] Tested manually or via automated tests
 - [ ] Conventional commit message used
+- [ ] Commit pushed to remote
 - [ ] No unnecessary churn or drive-by refactors
 
 PR sections to include in output:
