@@ -22,6 +22,23 @@ describe('content provider', () => {
     }
   });
 
+  it('supports transcript-only sections in the March follow-up post', async () => {
+    const post = await getPostBySlug('toronto-zoo-field-notes-march-1-2026');
+
+    expect(post).not.toBeNull();
+
+    for (const section of post?.content.sections ?? []) {
+      expect(section.paragraphs.length).toBeGreaterThanOrEqual(2);
+      expect([0, 2]).toContain(section.photos.length);
+    }
+
+    const lionSection = post?.content.sections.find((section) => section.id === 'white-lion');
+    expect(lionSection).toBeDefined();
+    expect(lionSection?.paragraphs.length).toBe(3);
+    expect(lionSection?.photos.length).toBe(0);
+    expect(lionSection?.video).toBeUndefined();
+  });
+
   it('resolves post by canonical date + title slug segments', async () => {
     const post = await getPostByDateAndSlug('2026', '2', '28', 'toronto-zoo-field-notes');
     expect(post?.slug).toBe('toronto-zoo-field-notes');

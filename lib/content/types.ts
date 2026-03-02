@@ -17,7 +17,7 @@ export interface AnimalTalkSection {
   id: string;
   title: string;
   paragraphs: [string, string, ...string[]];
-  photos: [MediaAsset, MediaAsset];
+  photos: [] | [MediaAsset, MediaAsset];
   video?: MediaAsset;
 }
 

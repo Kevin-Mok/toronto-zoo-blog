@@ -18,21 +18,23 @@ export function AnimalSection({ section }: AnimalSectionProps) {
         </p>
       ))}
 
-      <div className="media-grid media-grid--photos">
-        {section.photos.map((photo) => (
-          <figure key={photo.id} className="media-card">
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              width={photo.width}
-              height={photo.height}
-              className="media-image"
-              sizes="(max-width: 980px) 100vw, 50vw"
-            />
-            <figcaption className="media-caption">{photo.caption}</figcaption>
-          </figure>
-        ))}
-      </div>
+      {section.photos.length > 0 ? (
+        <div className="media-grid media-grid--photos">
+          {section.photos.map((photo) => (
+            <figure key={photo.id} className="media-card">
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                width={photo.width}
+                height={photo.height}
+                className="media-image"
+                sizes="(max-width: 980px) 100vw, 50vw"
+              />
+              <figcaption className="media-caption">{photo.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      ) : null}
 
       {section.video ? (
         <figure className="media-card media-card--video">

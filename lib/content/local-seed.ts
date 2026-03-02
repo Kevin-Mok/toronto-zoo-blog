@@ -163,12 +163,12 @@ export const LOCAL_POSTS: BlogPost[] = [
     slug: 'toronto-zoo-field-notes-march-1-2026',
     title: 'Toronto Zoo Field Notes (March 1, 2026)',
     excerpt:
-      'A family-first Toronto Zoo field note focused on pygmy hippo, penguin, and gorilla behavior, with practical media picks and conservation context.',
+      'A family-first Toronto Zoo field note combining media-backed hippo and penguin highlights with transcript-grounded gorilla and white lion updates.',
     publishDate: '2026-03-01',
     authorName: 'Toronto Zoo Report Team',
     category: 'field-notes',
-    tags: ['family-guide', 'toronto-zoo', 'pygmy-hippo', 'penguin', 'gorilla'],
-    readingMinutes: 7,
+    tags: ['family-guide', 'toronto-zoo', 'pygmy-hippo', 'penguin', 'gorilla', 'white-lion'],
+    readingMinutes: 8,
     hero: {
       id: 'hero-pygmy-hippo',
       kind: 'image',
@@ -181,7 +181,7 @@ export const LOCAL_POSTS: BlogPost[] = [
     content: {
       intro: [
         'This field note is designed for families who want clear, talk-through observations while moving through the zoo at a steady pace. The selected media emphasizes short, readable behavior moments that connect directly to habitat design and daily care.',
-        'Because transcript text was not available in this run, the draft is grounded in visual evidence and filename-traceable assets only. Each animal section follows the same repeatable structure: two photo highlights, one optional video highlight, and concise conservation-aware context.',
+        'This revision incorporates transcript-backed notes from the lion and species audio files while preserving the same media-backed format for sections with photo and video coverage. Where animals were not visible during capture, the section is presented as transcript-only with explicit context.',
       ],
       sections: [
         {
@@ -272,8 +272,9 @@ export const LOCAL_POSTS: BlogPost[] = [
           id: 'western-lowland-gorilla',
           title: 'Western Lowland Gorilla Talk',
           paragraphs: [
-            'The gorilla section centers on rest and perch use in a rope-and-platform enrichment environment. A seated portrait and hammock frame together show grip, weight distribution, and how suspended structures support comfortable positioning.',
-            'This section works best as welfare-by-design framing rather than spectacle: enrichment complexity, vertical space, and routine stability all influence visible behavior. The selected assets keep the writing grounded in observable body language.',
+            'The species transcripts describe active social management rather than one static troop view. Keepers distinguish between a bachelor grouping and a family grouping, and they avoid direct male-to-male mixing because that can escalate into fights.',
+            'Introductions are staged in steps: first with two barriers, then with one wire barrier, so gorillas can see and acclimate before closer integration. The transcript frames this as a gradual process based on behavior cues instead of a one-time release.',
+            'Visitors may see different groupings depending on timing and season. The transcripts note half-day rotation between boys and girls and summer outside and inside rotation, which explains why visibility can change between passes.',
           ],
           photos: [
             {
@@ -307,6 +308,16 @@ export const LOCAL_POSTS: BlogPost[] = [
             height: 1440,
             durationLabel: '14.7s',
           },
+        },
+        {
+          id: 'white-lion',
+          title: 'White Lion Talk',
+          paragraphs: [
+            'Lion transcripts note that the white lions were in-house during part of this window, so visitors could not always see them at the glass. Keepers described indoor access around 23C and emphasized gradual temperature transitions when animals move between indoor and outdoor spaces.',
+            'Family context in the transcripts identifies two females, Lemon and Makali, with Makali also called Mac. The same conversation references the male Fintan and provides lifespan framing: roughly 10 to 14 years in the wild and up to around 20 years in human care.',
+            'Conservation context in the keeper discussion states these are white lions, not albino lions, and explains the white coat as a genetic trait that requires both parents to carry the relevant gene. The same transcript cluster links rarity to poaching and trophy-hunting pressure in their regional range.',
+          ],
+          photos: [],
         },
       ],
       preservationLens: [

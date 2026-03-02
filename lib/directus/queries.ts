@@ -30,14 +30,18 @@ function mapMediaAsset(asset: DirectusMediaAsset) {
 
 function mapDirectusPost(post: DirectusPost): BlogPost {
   const mapSectionPhotos = (section: DirectusPost['animal_sections'][number]) => {
+    if (section.photos.length === 0) {
+      return [] as [];
+    }
+
     const first = section.photos[0];
     const second = section.photos[1];
 
-    if (!first || !second) {
-      throw new Error(`Directus section "${section.section_id}" does not have exactly two photos`);
+    if (section.photos.length === 2 && first && second) {
+      return [mapMediaAsset(first), mapMediaAsset(second)] as [MediaAsset, MediaAsset];
     }
 
-    return [mapMediaAsset(first), mapMediaAsset(second)] as [MediaAsset, MediaAsset];
+    throw new Error(`Directus section "${section.section_id}" must have either 0 or 2 photos`);
   };
 
   return {

@@ -17,7 +17,7 @@ const animalTalkSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
   paragraphs: z.tuple([z.string().min(1), z.string().min(1)]).rest(z.string().min(1)),
-  photos: z.tuple([mediaAssetSchema, mediaAssetSchema]),
+  photos: z.union([z.tuple([]), z.tuple([mediaAssetSchema, mediaAssetSchema])]),
   video: mediaAssetSchema.optional(),
 });
 

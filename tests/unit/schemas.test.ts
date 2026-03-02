@@ -26,6 +26,13 @@ describe('blog schema contracts', () => {
       'Pygmy Hippopotamus Talk',
       'African Penguin Talk',
       'Western Lowland Gorilla Talk',
+      'White Lion Talk',
     ]);
+
+    const lionSection = marchPost?.content.sections.find((section) => section.id === 'white-lion');
+    expect(lionSection).toBeDefined();
+    expect(lionSection?.paragraphs.length).toBe(3);
+    expect(lionSection?.photos.length).toBe(0);
+    expect(lionSection?.video).toBeUndefined();
   });
 });

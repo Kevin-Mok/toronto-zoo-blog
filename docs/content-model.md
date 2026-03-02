@@ -23,7 +23,7 @@
 - `section_id`
 - `title`
 - `paragraphs` (min 2)
-- `photos` (exactly 2)
+- `photos` (either 0 for transcript-only sections or exactly 2 for media-backed sections)
 - `video` (optional by source availability)
 
 ## Prisma Models
