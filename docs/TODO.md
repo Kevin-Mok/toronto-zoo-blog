@@ -615,6 +615,17 @@ Kickoff prompt for agent:
 ### [ ] dynamic opengraph preview images
 - generate share cards from post metadata
 
+Progress note (2026-03-02):
+- Implemented `app/opengraph-image.tsx` and `app/blog/opengraph-image/[...segments]/route.tsx` with branded `ImageResponse` cards plus fallback rendering for invalid/missing post contexts.
+- Updated metadata wiring in `app/layout.tsx` and `app/blog/[...segments]/page.tsx` to use dynamic OG image URLs for homepage, archive pages, and canonical post pages, including Twitter summary-large-image metadata.
+- Updated blog post OG card composition to use each post's hero image as the background with only title + Toronto Zoo Report logo treatment.
+- Locked homepage social copy to:
+  - Title: `Toronto Zoo Report: animal updates and keeper talks`
+  - Description: `Explore the blog for animal updates, keeper-talk summaries, and conservation context from on-site visits to the Toronto Zoo.`
+- Added dedicated manual image build spec at `docs/homepage-og-image-generation-spec.md`, and kept runtime homepage OG image source at `/opengraph-image` until custom image export is ready.
+- Local verification completed: `npm run typecheck`, `npm run lint`, and `npm run build` all pass.
+- Remaining before checking `[x]`: manual OG URL fetch check in a running server and external social debugger checks against a deployed URL.
+
 Goal:
 - Generate dynamic Open Graph images for posts and archive pages so shared links have consistent, branded previews.
 
@@ -633,7 +644,7 @@ Implementation approach:
 - Keep fallback behavior for missing or invalid post data.
 
 Step-by-step implementation:
-1. Add `app/blog/[...segments]/opengraph-image.tsx` with `ImageResponse`.
+1. Add `app/blog/opengraph-image/[...segments]/route.tsx` with `ImageResponse`.
 2. Resolve segment type (post/year/month/day) similarly to the page route parser.
 3. Fetch post or archive context using existing query helpers.
 4. Render branded OG card containing:
@@ -650,7 +661,7 @@ Step-by-step implementation:
 10. Verify social parsers can fetch the OG route publicly.
 
 Concrete file/model/API touchpoints:
-- `app/blog/[...segments]/opengraph-image.tsx` (new).
+- `app/blog/opengraph-image/[...segments]/route.tsx` (new).
 - `app/blog/[...segments]/page.tsx` (metadata image URL changes).
 - `app/opengraph-image.tsx` (optional default route).
 - `lib/site.ts` (absolute URL helpers if needed for OG links).
@@ -667,7 +678,7 @@ Validation checklist:
 - `npm run lint`
 - `npm run build`
 - Open generated OG URL directly in browser:
-  - `http://localhost:3000/blog/2026/3/1/<slug>/opengraph-image`
+  - `http://localhost:3000/blog/opengraph-image/2026/3/1/<slug>`
 - Validate response headers include image content type.
 - Run social debugger checks (for production URL):
   - Facebook Sharing Debugger
