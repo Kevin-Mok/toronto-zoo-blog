@@ -140,8 +140,22 @@ function getBlogOgImageUrl(canonicalPath: string): string {
   return `${SITE_URL}/blog/opengraph-image/${segmentPath}`;
 }
 
+const FEBRUARY_28_2026_POST_SLUG = 'toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026';
 const MARCH_1_2026_POST_SLUG = 'toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026';
-const MARCH_1_2026_OG_IMAGE_URL = `${SITE_URL}/media/toronto-zoo/2026-03-01/images/opengraph-image.jpg`;
+const FIXED_POST_OG_IMAGES: Record<string, { url: string; width: number; height: number; alt: string }> = {
+  [FEBRUARY_28_2026_POST_SLUG]: {
+    url: `${SITE_URL}/media/toronto-zoo/2026-02-28/images/og-img.jpg`,
+    width: 1024,
+    height: 541,
+    alt: 'Snow Leopard, Polar Bear, and Gibbon preview card for the February 28, 2026 Toronto Zoo field notes post.',
+  },
+  [MARCH_1_2026_POST_SLUG]: {
+    url: `${SITE_URL}/media/toronto-zoo/2026-03-01/images/opengraph-image.jpg`,
+    width: 1024,
+    height: 541,
+    alt: 'African Penguin Talk preview card for the March 1, 2026 Toronto Zoo field notes post.',
+  },
+};
 
 function archiveMetadata(
   title: string,
@@ -189,13 +203,11 @@ function postMetadata(post: Awaited<ReturnType<typeof getPostBySlug>>): Metadata
   const summary = post.excerpt.trim();
   const canonicalPath = getPostCanonicalPath(post);
   const absoluteUrl = `${SITE_URL}${canonicalPath}`;
-  const hasFixedOgImage = post.slug === MARCH_1_2026_POST_SLUG;
-  const ogImageUrl = hasFixedOgImage ? MARCH_1_2026_OG_IMAGE_URL : getBlogOgImageUrl(canonicalPath);
-  const ogImageWidth = hasFixedOgImage ? 1024 : 1200;
-  const ogImageHeight = hasFixedOgImage ? 541 : 630;
-  const ogImageAlt = hasFixedOgImage
-    ? 'African Penguin Talk preview card for the March 1, 2026 Toronto Zoo field notes post.'
-    : `${post.title} preview card`;
+  const fixedOgImage = FIXED_POST_OG_IMAGES[post.slug];
+  const ogImageUrl = fixedOgImage?.url ?? getBlogOgImageUrl(canonicalPath);
+  const ogImageWidth = fixedOgImage?.width ?? 1200;
+  const ogImageHeight = fixedOgImage?.height ?? 630;
+  const ogImageAlt = fixedOgImage?.alt ?? `${post.title} preview card`;
 
   return {
     title: post.title,

@@ -3,8 +3,9 @@
 Provide a reusable prompt document to generate a high-performing homepage Open Graph image for Toronto Zoo Report using:
 
 - Word logo image (`Image #1`) as a direct image input
-- Hero image as a direct image input:
-  - `http://localhost:3000/_next/image?url=%2Fmedia%2Fhero-image.png&w=1920&q=75`
+- Specific blog post image as a direct image input:
+  - `http://localhost:3000/media/posts/<post-image-file>.jpg`
+- Blog post content text as a copy source for image text generation
 
 This prompt is designed to improve social preview quality by enforcing practical OpenGraph checks (dimension, text clarity, CTA visibility, and accessibility).
 
@@ -26,16 +27,18 @@ Use this prompt when:
 
 - `{{BRAND_NAME}}`: `Toronto Zoo Report`
 - `{{LOGO_WORDMARK_IMAGE_URL}}`: `http://localhost:3000/media/logo-word.png`
-- `{{HERO_BACKGROUND_IMAGE_URL}}`: `http://localhost:3000/_next/image?url=%2Fmedia%2Fhero-image.png&w=1920&q=75`
+- `{{BLOG_POST_IMAGE_URL}}`: direct URL for the selected post image (example: `http://localhost:3000/media/posts/snow-leopard-enrichment.jpg`)
+- `{{BLOG_POST_TITLE}}`: explicit post title used as the primary copy anchor
+- `{{BLOG_POST_CONTENT}}`: raw post content (markdown/plain text excerpt) used to generate image headline/description copy
 - `{{PRIMARY_CTA_TEXT}}`: short action phrase (example: `Explore Blog`)
-- `{{HOMEPAGE_URL}}`: canonical homepage URL
+- `{{OG_TITLE_LONG}}`: long headline candidate (target 55-85 chars)
+- `{{OG_DESCRIPTION_LONG}}`: long description candidate (target 110-180 chars)
 
 ## Optional Inputs
 
+- `{{HOMEPAGE_URL}}`: canonical homepage URL
 - `{{LOGO_WORDMARK_LOCAL_FALLBACK_PATH}}`: `public/media/logo-word.png`
-- `{{HERO_LOCAL_FALLBACK_PATH}}`: `public/media/hero-image.png`
-- `{{OG_TITLE_LONG}}`: long headline candidate (target 55-85 chars)
-- `{{OG_DESCRIPTION_LONG}}`: long description candidate (target 110-180 chars)
+- `{{BLOG_POST_IMAGE_LOCAL_FALLBACK_PATH}}`: local fallback path for selected post image (example: `public/media/posts/snow-leopard-enrichment.jpg`)
 - `{{SECONDARY_BADGE_TEXT}}`: short trust marker (example: `Family-first reporting`)
 - `{{SEASONAL_CONTEXT}}`: optional context label (example: `Spring visits 2026`)
 
@@ -57,7 +60,7 @@ Use these as hard checks before accepting output:
 # Composition Guidance
 
 1. Background:
-   - Use `{{HERO_BACKGROUND_IMAGE_URL}}` as full-bleed base.
+   - Use `{{BLOG_POST_IMAGE_URL}}` as full-bleed base.
    - Apply subtle dark gradient overlay for text contrast.
 2. Logo:
    - Use `{{LOGO_WORDMARK_IMAGE_URL}}` exactly; do not redraw or restyle the wordmark.
@@ -85,20 +88,22 @@ Design objective:
 Inputs:
 - Brand: {{BRAND_NAME}} (Toronto Zoo Report)
 - Logo wordmark image URL: {{LOGO_WORDMARK_IMAGE_URL}}
-- Hero background image URL: {{HERO_BACKGROUND_IMAGE_URL}}
+- Blog post image URL: {{BLOG_POST_IMAGE_URL}}
 - Logo fallback local path: {{LOGO_WORDMARK_LOCAL_FALLBACK_PATH}}
-- Hero fallback local path: {{HERO_LOCAL_FALLBACK_PATH}}
+- Blog post image fallback local path: {{BLOG_POST_IMAGE_LOCAL_FALLBACK_PATH}}
+- Blog post content text: {{BLOG_POST_CONTENT}}
+- Blog post title: {{BLOG_POST_TITLE}}
 - Primary CTA: {{PRIMARY_CTA_TEXT}}
-- Homepage URL: {{HOMEPAGE_URL}}
-- Optional long title candidate: {{OG_TITLE_LONG}}
-- Optional long description candidate: {{OG_DESCRIPTION_LONG}}
+- Optional homepage URL: {{HOMEPAGE_URL}}
+- Long title candidate: {{OG_TITLE_LONG}}
+- Long description candidate: {{OG_DESCRIPTION_LONG}}
 - Optional secondary badge: {{SECONDARY_BADGE_TEXT}}
 - Optional seasonal context: {{SEASONAL_CONTEXT}}
 
 Hard constraints:
 1) Output composition sized for 1200x630 (1.91:1).
 2) Keep all essential text and logo inside safe margins (~48px+ from edges).
-3) Use the provided hero background image as base; add a subtle dark gradient/scrim for text contrast.
+3) Use the provided blog post image as base; add a subtle dark gradient/scrim for text contrast.
 4) Use the provided logo image file as-is; preserve proportions and colors, no stylization/distortion.
 5) Do not generate replacement logo art or synthetic background photography.
 6) Include:
@@ -108,10 +113,12 @@ Hard constraints:
 7) Keep visual style editorial, nature-forward, modern, and clean; no noisy collage look.
 8) Ensure strong contrast and legibility on mobile previews.
 9) Keep text concise enough to avoid clutter while still carrying a "long-form" information feel.
+10) Treat `{{BLOG_POST_TITLE}}`, `{{BLOG_POST_CONTENT}}`, `{{OG_TITLE_LONG}}`, and `{{OG_DESCRIPTION_LONG}}` as mandatory inputs. If any are missing/empty, return `NEEDS_INPUTS` with missing field names and do not produce final copy.
+11) Derive headline/description text from `{{BLOG_POST_CONTENT}}` and `{{BLOG_POST_TITLE}}`, and avoid introducing unsupported claims.
 
 Copy guidance:
-- Headline: promise value in plain language.
-- Description: explain what visitors get (animal updates, keeper-talk summaries, conservation context).
+- Headline: promise value in plain language, anchored to the strongest concrete topic in `{{BLOG_POST_CONTENT}}` and `{{BLOG_POST_TITLE}}`.
+- Description: explain what visitors get (animal updates, keeper-talk summaries, conservation context) and summarize one specific detail from `{{BLOG_POST_CONTENT}}`.
 - CTA: direct and action-oriented (example: "Explore Blog").
 
 Output format (required):
@@ -140,9 +147,12 @@ Output format (required):
 ```text
 {{BRAND_NAME}}=Toronto Zoo Report
 {{LOGO_WORDMARK_IMAGE_URL}}=http://localhost:3000/media/logo-word.png
-{{HERO_BACKGROUND_IMAGE_URL}}=http://localhost:3000/_next/image?url=%2Fmedia%2Fhero-image.png&w=1920&q=75
+{{BLOG_POST_IMAGE_URL}}=http://localhost:3000/media/posts/snow-leopard-enrichment.jpg
 {{LOGO_WORDMARK_LOCAL_FALLBACK_PATH}}=public/media/logo-word.png
-{{HERO_LOCAL_FALLBACK_PATH}}=public/media/hero-image.png
+{{BLOG_POST_IMAGE_LOCAL_FALLBACK_PATH}}=public/media/posts/snow-leopard-enrichment.jpg
+{{BLOG_POST_TITLE}}=Snow Leopard Habitat Upgrades Improve Winter Activity Visibility
+{{BLOG_POST_CONTENT}}=# Snow Leopard Winter Update
+Toronto Zoo keepers shared that expanded climbing platforms and new enrichment stations increased visible movement across morning and late-afternoon observation windows. Staff also noted how cold-weather feeding patterns affect pacing behavior and visitor education sessions now include conservation context on habitat fragmentation.
 {{PRIMARY_CTA_TEXT}}=Explore Blog
 {{HOMEPAGE_URL}}=https://torontozooreport.com
 {{OG_TITLE_LONG}}=Family-first Toronto Zoo reporting with field notes, keeper talk summaries, and conservation context
@@ -154,12 +164,14 @@ Output format (required):
 # Quality Gate Checklist
 
 - [ ] Output is explicitly designed for `1200x630`.
-- [ ] Prompt explicitly includes both source image inputs (logo + hero).
+- [ ] Prompt explicitly includes both source image inputs (logo + blog post image).
+- [ ] Required text inputs are present and non-empty: `BLOG_POST_TITLE`, `BLOG_POST_CONTENT`, `OG_TITLE_LONG`, `OG_DESCRIPTION_LONG`.
 - [ ] Wordmark is preserved and legible.
-- [ ] Background uses provided hero image (URL or local fallback path).
+- [ ] Background uses provided blog post image (URL or local fallback path).
 - [ ] Visual hierarchy is clear in first glance.
 - [ ] CTA is present, concise, and high contrast.
 - [ ] Headline and description are informative but not cluttered.
+- [ ] If blog post content is provided, generated copy reflects it accurately without fabricated claims.
 - [ ] `og:image:alt` text is specific and useful.
 - [ ] Final composition is readable at small preview size.
 - [ ] No visual noise, logo distortion, or low-contrast text.
