@@ -25,3 +25,20 @@ Services:
 - Postgres healthcheck via `pg_isready`.
 - Rollback path: redeploy previous image tag and restore latest SQL dump.
 - Cache invalidation: `POST /api/revalidate` with secret token.
+
+## DNS Monitoring
+
+- DNS provider watch script: `scripts/ops/watch-dns-provider.sh`
+- Default target domain: `torontozooreport.com`
+- Default refresh interval: every 5 seconds
+
+```bash
+chmod +x scripts/ops/watch-dns-provider.sh
+scripts/ops/watch-dns-provider.sh
+```
+
+Run a single check without watch loop:
+
+```bash
+scripts/ops/watch-dns-provider.sh --once
+```

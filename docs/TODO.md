@@ -47,19 +47,22 @@ Implementation approach:
   - Cloudflare: DNS host and optional Email Routing (forwarding only).
   - Mailgun: outbound send API and optional inbound routes.
 
-Step-by-step implementation (Cloudflare + Mailgun):
-1. Decide mail domain split:
+Step-by-step implementation (Cloudflare + Mailgun, migrating from Porkbun):
+1. In Cloudflare, add the domain and import current DNS records from Porkbun before changing nameservers.
+2. Audit imported records and ensure all existing site/email records are present before continuing (`A`/`AAAA`, `CNAME`, `MX`, SPF/DKIM/DMARC TXT, provider verification TXT, `CAA` if used).
+3. Decide mail domain split:
    - Keep regular inbox aliases on root domain (Cloudflare Email Routing, optional).
    - Use `mg.torontozooreport.com` for Mailgun sending and optional inbound handling.
-2. In Mailgun, add domain `mg.torontozooreport.com`.
-3. In Cloudflare DNS, add Mailgun-provided records for `mg.torontozooreport.com`:
+4. In Mailgun, add domain `mg.torontozooreport.com`.
+5. In Cloudflare DNS, add Mailgun-provided records for `mg.torontozooreport.com`:
    - SPF TXT
    - DKIM TXT/CNAME
    - MX records
    - tracking CNAME (if enabled)
-4. Wait for Mailgun domain verification to reach active status.
-5. Create Mailgun API key with send permission.
-6. Set env vars locally and in production secrets:
+6. Keep email-related DNS records `DNS only` (not proxied), including `MX`, SPF/DKIM/DMARC TXT, and Mailgun tracking host.
+7. Wait for Mailgun domain verification to reach active status.
+8. Create Mailgun API key with send permission.
+9. Set env vars locally and in production secrets:
    - `MAILGUN_API_KEY`
    - `MAILGUN_DOMAIN`
    - `MAILGUN_FROM`
@@ -69,18 +72,20 @@ Step-by-step implementation (Cloudflare + Mailgun):
      - `MAILGUN_DOMAIN=mg.torontozooreport.com`
      - `MAILGUN_FROM=Toronto Zoo Report <noreply@mg.torontozooreport.com>`
      - `CONTACT_EMAIL=contact@torontozooreport.com`
-7. Add a small send helper that calls Mailgun `/messages` API.
-8. Update contact API flow in `app/api/contact/route.ts`:
+10. Add a small send helper that calls Mailgun `/messages` API.
+11. Update contact API flow in `app/api/contact/route.ts`:
    - validate payload
    - write `ContactSubmission` row
    - call Mailgun helper
    - return `ok: true` even if email fails, with `notificationSent` flag
-9. Log email failures server-side without exposing provider errors to end users.
-10. If inbound/forwarding is needed:
+12. Log email failures server-side without exposing provider errors to end users.
+13. If inbound/forwarding is needed:
    - Do not configure both Cloudflare and Mailgun as inbound handlers for the same hostname.
    - Keep one handler per hostname to avoid routing conflicts.
-11. Add a docs runbook for key rotation, DNS checks, and provider outage behavior.
-12. Add anti-spam controls (honeypot + simple IP/email cooldown) before public launch.
+14. After DNS records are verified in Cloudflare, switch nameservers at Porkbun to Cloudflare nameservers.
+15. Verify post-cutover DNS resolution and email flow (`dig NS`, `dig MX`, `dig TXT`, Mailgun domain status, end-to-end send test).
+16. Add a docs runbook for key rotation, DNS checks, and provider outage behavior.
+17. Add anti-spam controls (honeypot + simple IP/email cooldown) before public launch.
 
 Step-by-step DNS migration (Porkbun -> Cloudflare):
 1. Add domain to Cloudflare and let Cloudflare import existing DNS records from Porkbun.
@@ -620,6 +625,7 @@ Progress note (2026-03-02):
 - Updated metadata wiring in `app/layout.tsx` and `app/blog/[...segments]/page.tsx` to use dynamic OG image URLs for homepage, archive pages, and canonical post pages, including Twitter summary-large-image metadata.
 - Updated blog post OG card composition to use each post's hero image as the background with only title + Toronto Zoo Report logo treatment.
 - Fixed OG runtime compatibility by falling back to `/media/opengraph-image-resized.jpg` when post hero sources use unsupported `next/og` formats (for example `.webp`), and removed `zIndex` styles that triggered unitless-value rendering warnings in `ImageResponse`.
+- Hardened canonical post metadata for fixed Toronto Zoo OG cards by adding publish-date fallback matching, so 2026-02-28 and 2026-03-01 posts still resolve to static OG files even if slug data varies.
 - Locked homepage social copy to:
   - Title: `Toronto Zoo Report: animal updates and keeper talks`
   - Description: `Explore the blog for animal updates, keeper-talk summaries, and conservation context from on-site visits to the Toronto Zoo.`

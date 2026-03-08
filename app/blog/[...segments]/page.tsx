@@ -142,20 +142,42 @@ function getBlogOgImageUrl(canonicalPath: string): string {
 
 const FEBRUARY_28_2026_POST_SLUG = 'toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026';
 const MARCH_1_2026_POST_SLUG = 'toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026';
-const FIXED_POST_OG_IMAGES: Record<string, { url: string; width: number; height: number; alt: string }> = {
-  [FEBRUARY_28_2026_POST_SLUG]: {
-    url: `${SITE_URL}/media/toronto-zoo/2026-02-28/images/og-img.jpg`,
-    width: 1024,
-    height: 541,
-    alt: 'Snow Leopard, Polar Bear, and Gibbon preview card for the February 28, 2026 Toronto Zoo field notes post.',
-  },
-  [MARCH_1_2026_POST_SLUG]: {
-    url: `${SITE_URL}/media/toronto-zoo/2026-03-01/images/opengraph-image.jpg`,
-    width: 1024,
-    height: 541,
-    alt: 'African Penguin Talk preview card for the March 1, 2026 Toronto Zoo field notes post.',
-  },
+
+interface FixedOgImageConfig {
+  url: string;
+  width: number;
+  height: number;
+  alt: string;
+}
+
+const FEBRUARY_28_2026_OG_IMAGE: FixedOgImageConfig = {
+  url: `${SITE_URL}/media/toronto-zoo/2026-02-28/images/og-img.jpg`,
+  width: 1024,
+  height: 541,
+  alt: 'Snow Leopard, Polar Bear, and Gibbon preview card for the February 28, 2026 Toronto Zoo field notes post.',
 };
+
+const MARCH_1_2026_OG_IMAGE: FixedOgImageConfig = {
+  url: `${SITE_URL}/media/toronto-zoo/2026-03-01/images/opengraph-image.jpg`,
+  width: 1024,
+  height: 541,
+  alt: 'African Penguin Talk preview card for the March 1, 2026 Toronto Zoo field notes post.',
+};
+
+const FIXED_POST_OG_IMAGES_BY_SLUG: Record<string, FixedOgImageConfig> = {
+  [FEBRUARY_28_2026_POST_SLUG]: FEBRUARY_28_2026_OG_IMAGE,
+  [MARCH_1_2026_POST_SLUG]: MARCH_1_2026_OG_IMAGE,
+};
+
+const FIXED_POST_OG_IMAGES_BY_PUBLISH_DATE: Record<string, FixedOgImageConfig> = {
+  '2026-02-28': FEBRUARY_28_2026_OG_IMAGE,
+  '2026-03-01': MARCH_1_2026_OG_IMAGE,
+};
+
+function getFixedPostOgImage(post: { slug: string; publishDate: string }): FixedOgImageConfig | undefined {
+  const normalizedSlug = post.slug.trim().toLowerCase();
+  return FIXED_POST_OG_IMAGES_BY_SLUG[normalizedSlug] ?? FIXED_POST_OG_IMAGES_BY_PUBLISH_DATE[post.publishDate];
+}
 
 function archiveMetadata(
   title: string,
@@ -203,7 +225,7 @@ function postMetadata(post: Awaited<ReturnType<typeof getPostBySlug>>): Metadata
   const summary = post.excerpt.trim();
   const canonicalPath = getPostCanonicalPath(post);
   const absoluteUrl = `${SITE_URL}${canonicalPath}`;
-  const fixedOgImage = FIXED_POST_OG_IMAGES[post.slug];
+  const fixedOgImage = getFixedPostOgImage(post);
   const ogImageUrl = fixedOgImage?.url ?? getBlogOgImageUrl(canonicalPath);
   const ogImageWidth = fixedOgImage?.width ?? 1200;
   const ogImageHeight = fixedOgImage?.height ?? 630;

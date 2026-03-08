@@ -2,7 +2,7 @@
 
 Provide a reusable prompt document to generate a high-performing homepage Open Graph image for Toronto Zoo Report using:
 
-- Word logo image (`Image #1`) as a direct image input
+- Word logo image as a direct image input
 - Specific blog post image as a direct image input:
   - `http://localhost:3000/media/posts/<post-image-file>.jpg`
 - Blog post content text as a copy source for image text generation
@@ -125,7 +125,7 @@ Output format (required):
 1) OG_IMAGE_PROMPT:
    - Final image-generation prompt text.
 2) NEGATIVE_PROMPT:
-   - Artifacts to avoid (illegible text, warped logos, busy overlays, low contrast).
+   - Artifacts to avoid (illegible text, warped logos, busy overlays, low contrast, any on-image text containing the word "official").
 3) COPY_BLOCK:
    - og_title:
    - og_description:
