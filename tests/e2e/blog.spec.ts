@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test('home to blog to toronto zoo post flow', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: /conservation storytelling/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /animal updates from the toronto zoo/i })).toBeVisible();
 
   await page.getByRole('link', { name: /explore blog/i }).click();
   await expect(page).toHaveURL(/\/blog$/);
@@ -11,7 +11,7 @@ test('home to blog to toronto zoo post flow', async ({ page }) => {
     .getByLabel('Blog posts')
     .getByRole(
       'link',
-      { name: /Toronto Zoo Field Notes: Snow Leopard, Polar Bear & Gibbon Highlights \(February 28, 2026\)/i },
+      { name: /^Toronto Zoo Field Notes: Snow Leopard, Polar Bear & Gibbon Highlights \(February 28, 2026\)$/i },
     )
     .click();
   await expect(page).toHaveURL(
@@ -27,7 +27,22 @@ test('home to blog to toronto zoo post flow', async ({ page }) => {
     .getByLabel('Blog posts')
     .getByRole(
       'link',
-      { name: /Toronto Zoo Field Notes: Pygmy Hippo, Penguins, Gorillas & White Lions \(March 1, 2026\)/i },
+      { name: /^Toronto Zoo Field Notes: White Lion Care, Genetics & Family Status \(March 8, 2026\)$/i },
+    )
+    .click();
+  await expect(page).toHaveURL(
+    /\/blog\/2026\/3\/8\/toronto-zoo-field-notes-white-lion-care-genetics-and-family-status-march-8-2026$/,
+  );
+  await expect(page.getByRole('heading', { name: /White Lion Habitat and Winter Care/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Lion-by-Lion Status and Family Context/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /White Lion Genetics and Conservation Context/i })).toBeVisible();
+
+  await page.goto('/blog');
+  await page
+    .getByLabel('Blog posts')
+    .getByRole(
+      'link',
+      { name: /^Toronto Zoo Field Notes: Pygmy Hippo, Penguins, Gorillas & White Lions \(March 1, 2026\)$/i },
     )
     .click();
   await expect(page).toHaveURL(

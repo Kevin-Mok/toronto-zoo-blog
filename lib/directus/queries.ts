@@ -16,6 +16,7 @@ import { blogPostsSchema, blogPostSchema } from '@/lib/validation/schemas';
 const TORONTO_WEATHER_FALLBACK_BY_DATE: Record<string, string> = {
   '2026-02-28': 'Toronto weather: -1°C',
   '2026-03-01': 'Toronto weather: -10°C',
+  '2026-03-08': 'Toronto weather: 9°C',
 };
 
 function mapMediaAsset(asset: DirectusMediaAsset) {

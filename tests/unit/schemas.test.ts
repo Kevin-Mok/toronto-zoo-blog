@@ -44,6 +44,26 @@ describe('blog schema contracts', () => {
     expect(lionSection?.video).toBeUndefined();
   });
 
+  it('contains the expected white-lion deep-dive sections in the March 8 post', () => {
+    const lionPost = LOCAL_POSTS.find(
+      (post) =>
+        post.slug ===
+        'toronto-zoo-field-notes-white-lion-care-genetics-and-family-status-march-8-2026',
+    );
+    expect(lionPost).toBeDefined();
+    const titles = lionPost?.content.sections.map((section) => section.title) ?? [];
+    expect(titles).toEqual([
+      'White Lion Habitat and Winter Care',
+      'Lion-by-Lion Status and Family Context',
+      'White Lion Genetics and Conservation Context',
+    ]);
+
+    for (const section of lionPost?.content.sections ?? []) {
+      expect(section.photos.length).toBe(0);
+      expect(section.video).toBeUndefined();
+    }
+  });
+
   it('stores rounded Toronto weather summaries in local seed posts', () => {
     const zooPosts = LOCAL_POSTS.filter((post) => post.slug.startsWith('toronto-zoo-field-notes-'));
     expect(zooPosts.length).toBeGreaterThan(0);

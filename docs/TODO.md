@@ -393,6 +393,9 @@ Kickoff prompt for agent:
 ### [ ] questions
 - reusable script to ask zookeepers
 
+Progress note (2026-03-08):
+- Added manual white-lion follow-up and reusable question-script docs under `docs/toronto-zoo/2026-03-08/`; CLI generator is still pending.
+
 Goal:
 - Generate repeatable interview question sets for zoo visits.
 

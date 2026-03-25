@@ -43,6 +43,21 @@ describe('content provider', () => {
     expect(lionSection?.video).toBeUndefined();
   });
 
+  it('supports a transcript-led white lion deep-dive post on March 8, 2026', async () => {
+    const post = await getPostBySlug(
+      'toronto-zoo-field-notes-white-lion-care-genetics-and-family-status-march-8-2026',
+    );
+
+    expect(post).not.toBeNull();
+    expect(post?.content.sections).toHaveLength(3);
+
+    for (const section of post?.content.sections ?? []) {
+      expect(section.paragraphs.length).toBeGreaterThanOrEqual(2);
+      expect(section.photos.length).toBe(0);
+      expect(section.video).toBeUndefined();
+    }
+  });
+
   it('resolves post by canonical date + title slug segments', async () => {
     const post = await getPostByDateAndSlug(
       '2026',
@@ -67,15 +82,30 @@ describe('content provider', () => {
     );
   });
 
-  it('returns rounded Toronto weather summaries for existing Toronto posts', async () => {
-    const [febPost, marchPost] = await Promise.all([
+  it('resolves the March 8 white lion post by canonical date + slug', async () => {
+    const post = await getPostByDateAndSlug(
+      '2026',
+      '3',
+      '8',
+      'toronto-zoo-field-notes-white-lion-care-genetics-and-family-status-march-8-2026',
+    );
+    expect(post?.slug).toBe(
+      'toronto-zoo-field-notes-white-lion-care-genetics-and-family-status-march-8-2026',
+    );
+  });
+
+  it('returns rounded Toronto weather summaries for Toronto posts', async () => {
+    const [febPost, marchPost, lionPost] = await Promise.all([
       getPostBySlug('toronto-zoo-field-notes-snow-leopard-polar-bear-and-gibbon-highlights-february-28-2026'),
       getPostBySlug('toronto-zoo-field-notes-pygmy-hippo-penguins-gorillas-and-white-lions-march-1-2026'),
+      getPostBySlug('toronto-zoo-field-notes-white-lion-care-genetics-and-family-status-march-8-2026'),
     ]);
 
     expect(febPost?.weatherSummary).toBe('Toronto weather: -1°C');
     expect(marchPost?.weatherSummary).toBe('Toronto weather: -10°C');
+    expect(lionPost?.weatherSummary).toBe('Toronto weather: 9°C');
     expect(febPost?.weatherSummary).not.toMatch(/\d+\.\d+/);
     expect(marchPost?.weatherSummary).not.toMatch(/\d+\.\d+/);
+    expect(lionPost?.weatherSummary).not.toMatch(/\d+\.\d+/);
   });
 });
