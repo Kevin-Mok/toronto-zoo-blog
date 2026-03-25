@@ -33,18 +33,18 @@ Stored under:
 
 - `docs/toronto-zoo/2026-02-28/transcripts/`
 
-Reusable transcription script:
+Reusable transcript workflows:
 
 ```bash
 scripts/media/transcribe-m4a-to-repo.sh --input-dir "/mnt/linux-files-3/hevin/03.01.26 - Toronto Zoo"
+scripts/media/copy-transcripts-to-repo.sh --input-dir "/path/to/whisper-txt" --audio-dir "/path/to/m4a" --date "2026-03-08"
 ```
 
 Behavior:
 
-- Detects `.m4a` files in the input directory.
-- Infers date from folder name (for example `03.01.26` -> `2026-03-01`).
-- Writes transcripts to `docs/toronto-zoo/<YYYY-MM-DD>/transcripts/`.
-- Defaults to Whisper `base.en` model.
+- `transcribe-m4a-to-repo.sh` detects `.m4a` files, infers the date from the folder name when possible, and writes new `.txt` transcripts to `docs/toronto-zoo/<YYYY-MM-DD>/transcripts/`.
+- `copy-transcripts-to-repo.sh` copies existing Whisper `.txt` transcripts, orders them by paired `.m4a` creation time when available, and renames them to `NN-topic-summary.txt`.
+- Both scripts support `--date` when the source directory name does not encode the visit date.
 
 Canonical spellings in authored copy:
 

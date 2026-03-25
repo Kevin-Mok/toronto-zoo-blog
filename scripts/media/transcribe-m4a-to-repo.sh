@@ -48,17 +48,17 @@ parse_date_from_name() {
 
   # YYYY-MM-DD, YYYY.MM.DD, YYYY/MM/DD
   if [[ "$cleaned" =~ (^|[[:space:]])([0-9]{4})[-.[:space:]]([0-9]{1,2})[-.[:space:]]([0-9]{1,2})($|[[:space:]]) ]]; then
-    local yyyy="${BASH_REMATCH[2]}"
-    local mm="${BASH_REMATCH[3]}"
-    local dd="${BASH_REMATCH[4]}"
+    local yyyy=$((10#${BASH_REMATCH[2]}))
+    local mm=$((10#${BASH_REMATCH[3]}))
+    local dd=$((10#${BASH_REMATCH[4]}))
     printf '%04d-%02d-%02d\n' "$yyyy" "$mm" "$dd"
     return 0
   fi
 
   # MM-DD-YY, MM.DD.YY, MM/DD/YY
   if [[ "$cleaned" =~ (^|[[:space:]])([0-9]{1,2})[-.[:space:]]([0-9]{1,2})[-.[:space:]]([0-9]{2})($|[[:space:]]) ]]; then
-    local mm="${BASH_REMATCH[2]}"
-    local dd="${BASH_REMATCH[3]}"
+    local mm=$((10#${BASH_REMATCH[2]}))
+    local dd=$((10#${BASH_REMATCH[3]}))
     local yy="${BASH_REMATCH[4]}"
     local yyyy=$((2000 + 10#$yy))
     printf '%04d-%02d-%02d\n' "$yyyy" "$mm" "$dd"
